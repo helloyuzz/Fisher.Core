@@ -54,7 +54,7 @@
     <Compile Include="LjkSchema.cs" />
     <Compile Include="LjkUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="util\SysTrace.cs" />
+    <Compile Include="Util\SysTrace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="api\index.md" />
