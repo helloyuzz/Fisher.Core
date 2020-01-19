@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB79814E-8A89-4E26-A646-EA1968F817A4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Ljk.Dapper.App</RootNamespace>
+    <AssemblyName>Ljk.Dapper.App</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Globals.cs" />
+    <Compile Include="Dapper\vo\aaa1.cs" />
+    <Compile Include="Dapper\vo\SQLField.cs" />
+    <Compile Include="Dapper\vo\TFlowAbnormal.cs" />
+    <Compile Include="Dapper\vo\TFlowApply.cs" />
+    <Compile Include="Dapper\vo\TFlowBarcodeInFlow.cs" />
+    <Compile Include="Dapper\vo\TFlowBDTest.cs" />
+    <Compile Include="Dapper\vo\TFlowCamScanFiles.cs" />
+    <Compile Include="Dapper\vo\TFlowCamScanFilesInBDReview.cs" />
+    <Compile Include="Dapper\vo\TFlowCamScanFilesInSterilizeReview.cs" />
+    <Compile Include="Dapper\vo\TFlowClean.cs" />
+    <Compile Include="Dapper\vo\TFlowCleanAbnormal.cs" />
+    <Compile Include="Dapper\vo\TFlowCleanBatch.cs" />
+    <Compile Include="Dapper\vo\TFlowCleanContainer.cs" />
+    <Compile Include="Dapper\vo\TFlowCollect.cs" />
+    <Compile Include="Dapper\vo\TFlowConfirmed.cs" />
+    <Compile Include="Dapper\vo\TFlowContainerInFlow.cs" />
+    <Compile Include="Dapper\vo\TFlowDeviceConnectionTxt.cs" />
+    <Compile Include="Dapper\vo\TFlowDoubleConfirmAuthorization.cs" />
+    <Compile Include="Dapper\vo\TFlowExternal2ndClean.cs" />
+    <Compile Include="Dapper\vo\TFlowExternal2ndCleanContainer.cs" />
+    <Compile Include="Dapper\vo\TFlowExternal2ndRecycle.cs" />
+    <Compile Include="Dapper\vo\TFlowExternal2ndRecycleProduct.cs" />
+    <Compile Include="Dapper\vo\TFlowExternal2ndRecycleProductInContainer.cs" />
+    <Compile Include="Dapper\vo\TFlowExternalReturn.cs" />
+    <Compile Include="Dapper\vo\TFlowImplantInExternel.cs" />
+    <Compile Include="Dapper\vo\TFlowIssue.cs" />
+    <Compile Include="Dapper\vo\TFlowIssueManually.cs" />
+    <Compile Include="Dapper\vo\TFlowOperationParameters.cs" />
+    <Compile Include="Dapper\vo\TFlowPack.cs" />
+    <Compile Include="Dapper\vo\TFlowPackBundle.cs" />
+    <Compile Include="Dapper\vo\TFlowPackFlowInBundle.cs" />
+    <Compile Include="Dapper\vo\TFlowPackReview.cs" />
+    <Compile Include="Dapper\vo\TFlowPatientInFlow.cs" />
+    <Compile Include="Dapper\vo\TFlowPoductInFlow.cs" />
+    <Compile Include="Dapper\vo\TFlowProductDynamicDetail.cs" />
+    <Compile Include="Dapper\vo\TFlowReceiptConfirmation.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycle.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycleAbnormal.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycleAbnormalReturn.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycleExternalProduct.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycleProduct.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycleProductDetailInContainer.cs" />
+    <Compile Include="Dapper\vo\TFlowRecycleProductInContainer.cs" />
+    <Compile Include="Dapper\vo\TFlowRental.cs" />
+    <Compile Include="Dapper\vo\TFlowReservation.cs" />
+    <Compile Include="Dapper\vo\TFlowReservationDetails.cs" />
+    <Compile Include="Dapper\vo\TFlowState.cs" />
+    <Compile Include="Dapper\vo\TFlowState2.cs" />
+    <Compile Include="Dapper\vo\TFlowStayRecycle.cs" />
+    <Compile Include="Dapper\vo\TFlowStayRecycleFlowID.cs" />
+    <Compile Include="Dapper\vo\TFlowSterilize.cs" />
+    <Compile Include="Dapper\vo\TFlowSterilizeBatch.cs" />
+    <Compile Include="Dapper\vo\TFlowSterilizeBundle.cs" />
+    <Compile Include="Dapper\vo\TFLowSterilizeContainer.cs" />
+    <Compile Include="Dapper\vo\TFLowSterilizeProductInContainer.cs" />
+    <Compile Include="Dapper\vo\TFlowSterilizeReview.cs" />
+    <Compile Include="Dapper\vo\TFlowStore.cs" />
+    <Compile Include="Dapper\vo\TFlowTask.cs" />
+    <Compile Include="Dapper\vo\TFlowUploadBatch.cs" />
+    <Compile Include="Dapper\vo\TFlowUploadIssueData.cs" />
+    <Compile Include="Dapper\vo\TFlowUploadIssueRentData.cs" />
+    <Compile Include="Dapper\vo\TFlowUploadRecycleContainerData.cs" />
+    <Compile Include="Dapper\vo\TFlowUploadRecycleData.cs" />
+    <Compile Include="Dapper\vo\TInventoryLocation.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneOffMaterialBatchInfos.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneOffMaterialInnerBatchInfos.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneOffMaterialsIn.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneOffMaterialsOut.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectBatchInfos.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectCheck.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectCheckDetail.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectInLocationActual.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectInnerBatchInfos.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectInWarehouse.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectOutWarehouse.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectsInfo.cs" />
+    <Compile Include="Dapper\vo\TInventoryOneTimeObjectSpecification.cs" />
+    <Compile Include="Dapper\vo\TInventoryProductInLocationActual.cs" />
+    <Compile Include="Dapper\vo\TinventorySpecification.cs" />
+    <Compile Include="Dapper\vo\TInventoryStock.cs" />
+    <Compile Include="Dapper\vo\TInventoryWarehouse.cs" />
+    <Compile Include="Dapper\vo\TMasterAccess.cs" />
+    <Compile Include="Dapper\vo\TMasterContainer.cs" />
+    <Compile Include="Dapper\vo\TMasterContainerType.cs" />
+    <Compile Include="Dapper\vo\TMasterDevice.cs" />
+    <Compile Include="Dapper\vo\TMasterDeviceDetail.cs" />
+    <Compile Include="Dapper\vo\TMasterDeviceInfo.cs" />
+    <Compile Include="Dapper\vo\TMasterDeviceMaintenance.cs" />
+    <Compile Include="Dapper\vo\TMasterExternalProductInManufacturer.cs" />
+    <Compile Include="Dapper\vo\TMasterHospital.cs" />
+    <Compile Include="Dapper\vo\TMasterImageInProduct.cs" />
+    <Compile Include="Dapper\vo\TMasterImplant.cs" />
+    <Compile Include="Dapper\vo\TMasterLabelTemplate.cs" />
+    <Compile Include="Dapper\vo\TMasterManufacturer.cs" />
+    <Compile Include="Dapper\vo\TMasterOneOffMaterialsClassify.cs" />
+    <Compile Include="Dapper\vo\TMasterOrg.cs" />
+    <Compile Include="Dapper\vo\TMasterPatient.cs" />
+    <Compile Include="Dapper\vo\TMasterPatientInHospital.cs" />
+    <Compile Include="Dapper\vo\TMasterPatientOperation.cs" />
+    <Compile Include="Dapper\vo\TMasterPatientRegister.cs" />
+    <Compile Include="Dapper\vo\TMasterPriority.cs" />
+    <Compile Include="Dapper\vo\TMasterProcess.cs" />
+    <Compile Include="Dapper\vo\TMasterProduct.cs" />
+    <Compile Include="Dapper\vo\TMasterProductBox.cs" />
+    <Compile Include="Dapper\vo\TMasterProductDetails.cs" />
+    <Compile Include="Dapper\vo\TMasterProductGroup.cs" />
+    <Compile Include="Dapper\vo\TMasterProductInClassify.cs" />
+    <Compile Include="Dapper\vo\TMasterProductInfo.cs" />
+    <Compile Include="Dapper\vo\TMasterProductInGroup.cs" />
+    <Compile Include="Dapper\vo\TMasterProductInProductSimple.cs" />
+    <Compile Include="Dapper\vo\TMasterProductPackageType.cs" />
+    <Compile Include="Dapper\vo\TMasterProductPackageTypeDetail.cs" />
+    <Compile Include="Dapper\vo\TMasterProductPrice.cs" />
+    <Compile Include="Dapper\vo\TMasterProductSimple.cs" />
+    <Compile Include="Dapper\vo\TMasterProductType.cs" />
+    <Compile Include="Dapper\vo\TMasterRole.cs" />
+    <Compile Include="Dapper\vo\TMasterRoleInAccess.cs" />
+    <Compile Include="Dapper\vo\TMasterSection.cs" />
+    <Compile Include="Dapper\vo\TMasterShapeType.cs" />
+    <Compile Include="Dapper\vo\TMasterSterilizeType.cs" />
+    <Compile Include="Dapper\vo\TMasterSupplier.cs" />
+    <Compile Include="Dapper\vo\TMasterTag.cs" />
+    <Compile Include="Dapper\vo\TMasterTagInProduct.cs" />
+    <Compile Include="Dapper\vo\TMasterTemplateSetting.cs" />
+    <Compile Include="Dapper\vo\TMasterUnqualified.cs" />
+    <Compile Include="Dapper\vo\TMasterUser.cs" />
+    <Compile Include="Dapper\vo\TMasterUserInOrg.cs" />
+    <Compile Include="Dapper\vo\TMasterUserInRole.cs" />
+    <Compile Include="Dapper\vo\TSysConfiguration.cs" />
+    <Compile Include="Dapper\vo\TSysMessage.cs" />
+    <Compile Include="Dapper\vo\TSysTaskConfiguration.cs" />
+    <Compile Include="Dapper\vo\TSysUniqueCode.cs" />
+    <Compile Include="Dapper\vo\TTraceApply.cs" />
+    <Compile Include="Dapper\vo\TTraceClean.cs" />
+    <Compile Include="Dapper\vo\TTraceIssue.cs" />
+    <Compile Include="Dapper\vo\TTracePack.cs" />
+    <Compile Include="Dapper\vo\TTraceProductPackageType.cs" />
+    <Compile Include="Dapper\vo\TTraceRecycle.cs" />
+    <Compile Include="Dapper\vo\TTraceSterilize.cs" />
+    <Compile Include="Dapper\vo\TTraceSterilizeReview.cs" />
+    <Compile Include="Dapper\vo\TTrainDocument.cs" />
+    <Compile Include="Dapper\vo\TTrainDocumentStudyRecord.cs" />
+    <Compile Include="Dapper\vo\User.cs" />
+    <Compile Include="Form_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Main.Designer.cs">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form_Main.resx">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ljk.Dapper\Ljk.Dapper.csproj">
+      <Project>{6a2edce6-7ef0-4334-b86c-b06fd74a1dae}</Project>
+      <Name>Ljk.Dapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
