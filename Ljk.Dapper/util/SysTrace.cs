@@ -6,8 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace CSSD.Packpress.Client {
-    public class SwTrace {
+namespace Ljk.Dapper {
+    public class SysTrace {
         private static string _enableSystemTraceLog = "";
         private static string EnableSystemTraceLog {
             get {
@@ -29,11 +29,11 @@ namespace CSSD.Packpress.Client {
             if("FALSE".Equals(EnableSystemTraceLog,StringComparison.CurrentCultureIgnoreCase)) {
                 return;
             }
-            string fileName = AppDomain.CurrentDomain.BaseDirectory + "\\system_tracelog.txt";
+            string fileName = AppDomain.CurrentDomain.BaseDirectory + "\\System_tracelog.txt";
             if(File.Exists(fileName)) {
                 FileInfo fileInfo = new FileInfo(fileName);
                 if(fileInfo.Length > 1024 * 100) {
-                    File.Move(fileName,fileName.Replace("system_tracelog.txt","system_tracelog_" + DateTime.Now.ToString("yyyyMMdd-HHmmss-fff") + ".txt"));
+                    File.Move(fileName,fileName.Replace("system_tracelog.txt","System_tracelog_" + DateTime.Now.ToString("yyyyMMdd-HHmmss-fff") + ".txt"));
                 }
             }
 

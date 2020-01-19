@@ -11,15 +11,15 @@ namespace Ljk.Dapper {
         public string SelectSQLFieldString {
             get {
                 string _temp = "";
-                List<LjkDapperField> dapperFields = Fields.FindAll(t => t.Include.Equals(Include.True));
-                if(dapperFields == null || dapperFields.Count <=0) {
-                    dapperFields = Fields.FindAll(t => t.Include.Equals(Include.False) == false);
+                List<LjkDapperField> dapperFields = Fields.FindAll(t => t.QueryOption.Equals(QueryOption.Include));
+                if(dapperFields == null || dapperFields.Count <= 0) {
+                    dapperFields = Fields.FindAll(t => t.QueryOption.Equals(QueryOption.Exclude) == false);
                 }
-                foreach(LjkDapperField dapperField in dapperFields) {               
+                foreach(LjkDapperField dapperField in dapperFields) {
                     if(string.IsNullOrEmpty(_temp) == false) {
                         _temp += ",";
                     }
-                    _temp += "[" +dapperField.Name+"]";
+                    _temp += "[" + dapperField.Name + "]";
                 }
                 return _temp;
             }

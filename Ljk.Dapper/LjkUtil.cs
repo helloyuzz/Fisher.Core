@@ -22,6 +22,11 @@ namespace Ljk.Dapper {
             return selectSQLFields;
         }
 
+        /// <summary>
+        /// 解析对象vo==>LjkSchema类
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         internal static LjkSchema ParseSchema(Type type) {
             LjkSchema schema = new LjkSchema();
             schema.SchemaName = type.Name;
@@ -49,7 +54,11 @@ namespace Ljk.Dapper {
             }
             return getInt;
         }
-
+        /// <summary>
+        /// 解析Boolean类型对数据库bit类型，返回值（bit:0、1）
+        /// </summary>
+        /// <param name="getMethodValue"></param>
+        /// <returns></returns>
         internal static int ParseBoolToBit(object getMethodValue) {
             int bitValue = 0;
             string stringValue = "";

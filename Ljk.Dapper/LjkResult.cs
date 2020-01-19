@@ -13,7 +13,7 @@ namespace Ljk.Dapper {
     public partial class LjkResult {
         public Result ExecResult { get; set; }
         public Exception ExecException { get; set; }
-        public string ShowSQLText { get; set; }
+        public string CommondText { get; set; }
         public int RecentId { get;  set; }
         public string RecentUUID { get; set; }
     }

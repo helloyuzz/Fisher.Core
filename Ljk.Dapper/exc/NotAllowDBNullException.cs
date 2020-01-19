@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ljk.Dapper.exc {
-    public class FieldNotAllowDBNullException:Exception {
-        public FieldNotAllowDBNullException(string message) : base(message) {
+    public class NotAllowDBNullException:Exception {
+        public NotAllowDBNullException(string message) : base(message) {
         }
     }
 }

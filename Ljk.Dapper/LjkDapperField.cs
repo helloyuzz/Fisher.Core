@@ -15,10 +15,21 @@ namespace Ljk.Dapper {
         /// <summary>
         /// 默认不包括，需显示指定为False（表示才能加入查询结果集）
         /// </summary>
-        public Include Include { get; set; } = Include.Default;
+        public QueryOption QueryOption { get; set; } = QueryOption.Default;
         public int KEY_SEQ { get; set; }
     }
-    public enum Include {
-        Default,True,False
+    public enum QueryOption {
+        /// <summary>
+        /// 默认
+        /// </summary>
+        Default,
+        /// <summary>
+        /// 包括
+        /// </summary>
+        Include,
+        /// <summary>
+        /// 不包括
+        /// </summary>
+        Exclude
     }
 }

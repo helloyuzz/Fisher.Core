@@ -3,13 +3,14 @@ using Ljk.Dapper.exc;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
+/// <summary>
+/// 
+/// </summary>
 namespace Ljk.Dapper {
-    public static partial class LjkDapper0 {
+    public static partial class LjkDapper {
         public static LjkResult Insert<T>(this IDbConnection connection,T vo) {
             LjkResult result = new LjkResult();
             LjkSchema schema = LjkUtil.ParseSchema(vo.GetType());
@@ -28,12 +29,12 @@ namespace Ljk.Dapper {
                 if(getMethodValue == null) {    // 忽略null值，对应生成类中必须允许为null对象，也就是指定“int？”属性
                     if(dapperField.AllowDBNull == false) {
                         result.ExecResult = Result.Exception;
-                        result.ExecException = new FieldNotAllowDBNullException(string.Format("必填字段{0}数据库不允许为null!",dapperField.Name));
+                        result.ExecException = new NotAllowDBNullException(string.Format("必填字段{0}数据库不允许为null!",dapperField.Name));
                         break;
                     }
                     continue;
                 }
-                
+
                 if(isFirstRow == false) {
                     sqlString += ",";
                     valueString += ",";
@@ -58,7 +59,7 @@ namespace Ljk.Dapper {
                 isFirstRow = false;
             }
             sqlString += string.Format("){0})",valueString);    // like:insert into [schema]([filedlist...]) values([values...]);
-            result.ShowSQLText = sqlString;
+            result.CommondText = sqlString;
             if(result.ExecException == null) {
                 try {
                     if(connection.State == ConnectionState.Closed) {
@@ -93,7 +94,7 @@ namespace Ljk.Dapper {
         }
         public static LjkResult Update<T>(this IDbConnection connection,T item) {
             LjkResult result = new LjkResult();
-            
+
 
 
             return result;
@@ -111,7 +112,7 @@ namespace Ljk.Dapper {
             LjkDapperField dapperField = schema.Fields.Find(t => t.IsPrimaryKey == true);
             string pkFieldName = dapperField.Name;  // 主键名称
             if(dapperField == null) {                                     // 检查主键是否定义
-                throw new PrimaryKeyNotDefineException(schema.SchemaName);
+                throw new PrimaryKeyIsNullException(schema.SchemaName);
             }
             string sqlString = "";
             if(pk_Int > 0) {
@@ -126,7 +127,7 @@ namespace Ljk.Dapper {
                 sqlString = string.Format(" where {0}=\"{1}\"",pkFieldName,pk_uuid);
             } else if(string.IsNullOrEmpty(sqlCondition) == false) {
                 sqlString = sqlCondition;
-            } 
+            }
 
             LjkResult<T> result = Select<T>(connection,sqlString);
             if(result.Result.Count > 0) {
@@ -137,7 +138,7 @@ namespace Ljk.Dapper {
         }
 
         /// <summary>
-        /// 执行数据库查询，返回Ljk.Dapper.LjkList类型，支持分页操作
+        /// execute db Select action，return as Ljk.Dapper.LjkList
         /// </summary>
         /// <example>
         /// <code>
@@ -153,32 +154,32 @@ namespace Ljk.Dapper {
         /// </code>
         /// </example>
         /// <param name="sqlCondition" >
-        /// <para>查询条件：</para>
-        /// <para>格式：" where name="xxx" and code="xxx""</para>
+        /// <para>sqlCondition：</para>
+        /// <para>Example：" where name="xxx" and code="xxx""</para>
         /// <seealso cref="www.163.com"/>
         /// </param>
         /// <param name="orderby">
-        /// <para>查询排序:</para>
-        /// <para>格式：" order by id asc[desc]"</para>
+        /// <para>sqlOrderby:</para>
+        /// <para>Example：" order by id asc[desc]"</para>
         /// </param>
         /// <returns>Ljk.Dapper.LjkList</returns>
         public static LjkResult<T> Select<T>(this IDbConnection connection,string sqlCondition = null,string orderby = null) where T : new() {
             return Select<T>(connection,sqlCondition,orderby,null);
         }
         /// <summary>
-        ///  执行数据库查询，返回Ljk.Dapper.LjkList类型，支持分页操作
+        ///  execute db Select action，return as Ljk.Dapper.LjkList
         /// </summary>
         /// <param name="sqlCondition" >
-        /// <para>查询条件：</para>
-        /// <para>格式：" where name="xxx" and code="xxx""</para>
+        /// <para>sqlCondition：</para>
+        /// <para>Example：" where name="xxx" and code="xxx""</para>
         /// </param>
         /// <param name="orderby">
-        /// <para>查询排序:</para>
-        /// <para>格式：" order by id asc[desc]"</para>
+        /// <para>sqlOrderby:</para>
+        /// <para>Example：" order by id asc[desc]"</para>
         /// </param>
         /// <param name="selectFields">
-        /// <para>指定查询字段（仅查询指定的字段）：</para>
-        /// <para>示例："id","Name",...</para>
+        /// <para>select fields：</para>
+        /// <para>Example："id","Name",...</para>
         /// </param>
         /// <returns>Ljk.Dapper.LjkList</returns>
         public static LjkResult<T> Select<T>(this IDbConnection connection,string sqlCondition = null,string orderby = null,params string[] selectFields) where T : new() {
@@ -187,19 +188,19 @@ namespace Ljk.Dapper {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pageSize">分页PageSize</param>
-        /// <param name="pageIndex">分页PageIndex</param>
+        /// <param name="pageSize">PageSize</param>
+        /// <param name="pageIndex">PageIndex</param>
         /// <param name="sqlCondition" >
-        /// <para>查询条件：</para>
-        /// <para>格式：" where name="xxx" and code="xxx""</para>
+        /// <para>sqlCondition：</para>
+        /// <para>Example：" where name="xxx" and code="xxx""</para>
         /// </param>
         /// <param name="orderby">
-        /// <para>查询排序:</para>
-        /// <para>格式：" order by id asc[desc]"</para>
+        /// <para>sqlOrderby:</para>
+        /// <para>Example：" order by id asc[desc]"</para>
         /// </param>
         /// <param name="selectFields">
-        /// <para>指定查询字段（仅查询指定的字段）：</para>
-        /// <para>示例："id","Name",...</para>
+        /// <para>select fields：</para>
+        /// <para>Example："id","Name",...</para>
         /// </param>
         /// <returns></returns>
         public static LjkResult<T> Select<T>(this IDbConnection connection,int pageSize = 10,int pageIndex = 1,string sqlCondition = null,string orderby = null,params string[] selectFields) where T : new() {
@@ -216,7 +217,7 @@ namespace Ljk.Dapper {
             string pkFieldName = schema.Fields.Find(t => t.IsPrimaryKey == true).Name;  // 主键名称
             if(string.IsNullOrEmpty(pkFieldName)) {                                     // 检查主键是否定义
                 result.ExecResult = Result.Exception;
-                result.ExecException = new PrimaryKeyNotDefineException(schema.SchemaName);
+                result.ExecException = new PrimaryKeyIsNullException(schema.SchemaName);
             } else {
                 string cmdTxt = "select ";
                 string countTxt = string.Format("select count({0}) from {1}",pkFieldName,schema.SchemaName);    // 统计数量
@@ -228,7 +229,7 @@ namespace Ljk.Dapper {
                             result.ExecException = new IllegalFieldException(string.Format("Illegal Field:\"{0}\"",field));
                             break;
                         }
-                        dapperField.Include = Include.True;
+                        dapperField.QueryOption = QueryOption.Include;
                     }
                 }
                 if(result.ExecException == null) {  // 没有错误，继续执行
@@ -258,9 +259,9 @@ namespace Ljk.Dapper {
                     try {
                         IDbCommand command = connection.CreateCommand();
                         command.CommandText = cmdTxt;
-                        List<string> tempList = schema.Fields.Where(t => t.Include.Equals(Include.True)).Select(t => t.Name).ToList();
+                        List<string> tempList = schema.Fields.Where(t => t.QueryOption.Equals(QueryOption.Include)).Select(t => t.Name).ToList();
                         if(tempList == null || tempList.Count <= 0) {
-                            tempList = schema.Fields.Where(t => t.Include.Equals(Include.False) == false).Select(t => t.Name).ToList();
+                            tempList = schema.Fields.Where(t => t.QueryOption.Equals(QueryOption.Exclude) == false).Select(t => t.Name).ToList();
                         }
 
                         IDataReader dataReader = command.ExecuteReader();

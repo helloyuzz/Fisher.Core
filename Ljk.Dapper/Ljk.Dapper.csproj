@@ -44,17 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="exc\FieldNotAllowDBNullException.cs" />
+    <Compile Include="exc\NotAllowDBNullException.cs" />
     <Compile Include="exc\IllegalFieldException.cs" />
     <Compile Include="exc\PrimaryKeyIllegalTypeException.cs" />
-    <Compile Include="exc\PrimaryKeyNotDefineException.cs" />
+    <Compile Include="exc\PrimaryKeyIsNullException.cs" />
     <Compile Include="LjkDapper.cs" />
     <Compile Include="LjkDapperField.cs" />
     <Compile Include="LjkResult.cs" />
     <Compile Include="LjkSchema.cs" />
     <Compile Include="LjkUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="util\SwTrace.cs" />
+    <Compile Include="util\SysTrace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="api\index.md" />

@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ljk.Dapper.exc {
-    public class PrimaryKeyNotDefineException:Exception {
-        public PrimaryKeyNotDefineException(string message) : base(message) {
+    public class PrimaryKeyIsNullException:Exception {
+        public PrimaryKeyIsNullException(string message) : base(message) {
             message += "未定义主键。";
         }
     }
