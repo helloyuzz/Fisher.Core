@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterAccess",Remarks="")]
    public class TMasterAccess {
-      [LjkDapperField(Name="AccessID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="AccessID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? AccessID {
           get;
           set;
       }
-      [LjkDapperField(Name="RootAccessID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="RootAccessID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? RootAccessID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="AccessUri",SqlDbType=SqlDbType.NText,MaxLength=2147483646,Remarks="科室ID")]
+      [LjkDapperField(Name="AccessUri",SqlDbType=SqlDbType.NText,MaxLength=2147483646)]
       public virtual string AccessUri {
           get;
           set;

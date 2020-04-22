@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowSterilizeBatch",Remarks="")]
    public class TFlowSterilizeBatch {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? DeviceID {
           get;
           set;
@@ -23,16 +23,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="DeviceBatchNumber",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? DeviceBatchNumber {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsReceiptPrinted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1,Remarks="科室ID")]
-      public virtual bool? IsReceiptPrinted {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsMustBiotest",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
-      public virtual bool? IsMustBiotest {
           get;
           set;
       }
@@ -58,6 +48,16 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsReceiptPrinted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsReceiptPrinted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsMustBiotest",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsMustBiotest {
           get;
           set;
       }

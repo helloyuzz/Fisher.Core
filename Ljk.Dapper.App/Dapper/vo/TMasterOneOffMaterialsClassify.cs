@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterOneOffMaterialsClassify",Remarks="")]
    public class TMasterOneOffMaterialsClassify {
-      [LjkDapperField(Name="ClassifyID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ClassifyID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ClassifyID {
           get;
           set;
       }
-      [LjkDapperField(Name="ClassifyName",SqlDbType=SqlDbType.NVarChar,MaxLength=100,Remarks="FlowID")]
+      [LjkDapperField(Name="ClassifyName",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
       public virtual string ClassifyName {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="IsAddSterilize",SqlDbType=SqlDbType.Bit,MaxLength=1,Remarks="科室ID")]
+      [LjkDapperField(Name="IsAddSterilize",SqlDbType=SqlDbType.Bit,MaxLength=1)]
       public virtual bool? IsAddSterilize {
           get;
           set;

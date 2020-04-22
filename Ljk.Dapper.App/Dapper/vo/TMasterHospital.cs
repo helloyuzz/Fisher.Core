@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterHospital",Remarks="")]
    public class TMasterHospital {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="HospitalGUID",SqlDbType=SqlDbType.NText,AllowDBNull =false,MaxLength=2147483646,Remarks="FlowID")]
+      [LjkDapperField(Name="HospitalGUID",SqlDbType=SqlDbType.NText,AllowDBNull =false,MaxLength=2147483646)]
       public virtual string HospitalGUID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="CreatedTime",SqlDbType=SqlDbType.DateTime,MaxLength=16,Remarks="科室ID")]
+      [LjkDapperField(Name="CreatedTime",SqlDbType=SqlDbType.DateTime,MaxLength=16)]
       public virtual DateTime? CreatedTime {
           get;
           set;

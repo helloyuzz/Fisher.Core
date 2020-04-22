@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowIssue",Remarks="")]
    public class TFlowIssue {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? FlowID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="IssueOrgID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="IssueOrgID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? IssueOrgID {
           get;
           set;
@@ -63,6 +63,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="RentalID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? RentalID {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IssueBarcode",SqlDbType=SqlDbType.NVarChar,MaxLength=200)]
+      public virtual string IssueBarcode {
           get;
           set;
       }

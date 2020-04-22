@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowOperationParameters",Remarks="")]
    public class TFlowOperationParameters {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? DeviceID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="OperationParameters",SqlDbType=SqlDbType.NText,MaxLength=2147483646,Remarks="科室ID")]
+      [LjkDapperField(Name="OperationParameters",SqlDbType=SqlDbType.NText,MaxLength=2147483646)]
       public virtual string OperationParameters {
           get;
           set;

@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowCleanContainer",Remarks="")]
    public class TFlowCleanContainer {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="ContainerFlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="ContainerFlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? ContainerFlowID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="ReviewUserID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="ReviewUserID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? ReviewUserID {
           get;
           set;
@@ -38,11 +38,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="ReviewRemark",SqlDbType=SqlDbType.NText,MaxLength=2147483646)]
       public virtual string ReviewRemark {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsReceiptPrinted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
-      public virtual bool? IsReceiptPrinted {
           get;
           set;
       }
@@ -68,6 +63,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsReceiptPrinted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsReceiptPrinted {
           get;
           set;
       }

@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterSection",Remarks="")]
    public class TMasterSection {
-      [LjkDapperField(Name="SectionID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="SectionID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? SectionID {
           get;
           set;
       }
-      [LjkDapperField(Name="OrgID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="OrgID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? OrgID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="SectionBarcode",SqlDbType=SqlDbType.NVarChar,MaxLength=400,Remarks="科室ID")]
+      [LjkDapperField(Name="SectionBarcode",SqlDbType=SqlDbType.NVarChar,MaxLength=400)]
       public virtual string SectionBarcode {
           get;
           set;

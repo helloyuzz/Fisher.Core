@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowRecycleAbnormal",Remarks="")]
    public class TFlowRecycleAbnormal {
-      [LjkDapperField(Name="RecycleAbnormalID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="RecycleAbnormalID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? RecycleAbnormalID {
           get;
           set;
       }
-      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? FlowID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="Remark",SqlDbType=SqlDbType.NVarChar,MaxLength=1000,Remarks="科室ID")]
+      [LjkDapperField(Name="Remark",SqlDbType=SqlDbType.NVarChar,MaxLength=1000)]
       public virtual string Remark {
           get;
           set;

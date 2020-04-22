@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowContainerInFlow",Remarks="")]
    public class TFlowContainerInFlow {
-      [LjkDapperField(Name="ContainerFlowID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ContainerFlowID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ContainerFlowID {
           get;
           set;
       }
-      [LjkDapperField(Name="ContainerID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="ContainerID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? ContainerID {
           get;
           set;
@@ -23,11 +23,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="PreContainerFlowID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? PreContainerFlowID {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="CleanType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="科室ID")]
-      public virtual int? CleanType {
           get;
           set;
       }
@@ -53,6 +48,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="CleanType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
+      public virtual int? CleanType {
           get;
           set;
       }

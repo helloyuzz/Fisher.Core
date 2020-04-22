@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterDeviceInfo",Remarks="")]
    public class TMasterDeviceInfo {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? DeviceID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="MaintenanceCycle",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="MaintenanceCycle",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? MaintenanceCycle {
           get;
           set;
@@ -63,6 +63,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsMustBeMaintenance",SqlDbType=SqlDbType.Bit,MaxLength=1)]
+      public virtual bool? IsMustBeMaintenance {
           get;
           set;
       }

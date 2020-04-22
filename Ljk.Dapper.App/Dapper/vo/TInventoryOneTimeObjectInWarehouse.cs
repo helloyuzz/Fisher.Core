@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TInventoryOneTimeObjectInWarehouse",Remarks="")]
    public class TInventoryOneTimeObjectInWarehouse {
-      [LjkDapperField(Name="InWarehouseID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="InWarehouseID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? InWarehouseID {
           get;
           set;
       }
-      [LjkDapperField(Name="InnerBatchInfoID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="InnerBatchInfoID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? InnerBatchInfoID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="InWarehouseTime",SqlDbType=SqlDbType.DateTime,AllowDBNull =false,MaxLength=16,Remarks="科室ID")]
+      [LjkDapperField(Name="InWarehouseTime",SqlDbType=SqlDbType.DateTime,AllowDBNull =false,MaxLength=16)]
       public virtual DateTime? InWarehouseTime {
           get;
           set;

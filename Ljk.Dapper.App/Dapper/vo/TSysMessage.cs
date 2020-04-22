@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TSysMessage",Remarks="")]
    public class TSysMessage {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="MessageID",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=200,Remarks="FlowID")]
+      [LjkDapperField(Name="MessageID",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=200)]
       public virtual string MessageID {
           get;
           set;
@@ -26,13 +26,8 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="IsRead",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1,Remarks="科室ID")]
+      [LjkDapperField(Name="IsRead",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsRead {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="MessegeType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
-      public virtual int? MessegeType {
           get;
           set;
       }
@@ -58,6 +53,16 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="MessegeType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
+      public virtual int? MessegeType {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="MessageLevel",SqlDbType=SqlDbType.Int,MaxLength=4)]
+      public virtual int? MessageLevel {
           get;
           set;
       }

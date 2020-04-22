@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterUser",Remarks="")]
    public class TMasterUser {
-      [LjkDapperField(Name="UserID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="UserID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? UserID {
           get;
           set;
       }
-      [LjkDapperField(Name="UserCode",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=100,Remarks="FlowID")]
+      [LjkDapperField(Name="UserCode",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=100)]
       public virtual string UserCode {
           get;
           set;
@@ -26,18 +26,13 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="Password",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400,Remarks="科室ID")]
+      [LjkDapperField(Name="Password",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400)]
       public virtual string Password {
           get;
           set;
       }
       [LjkDapperField(Name="UserBarcode",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400)]
       public virtual string UserBarcode {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsSterilizeUser",SqlDbType=SqlDbType.Int,MaxLength=4)]
-      public virtual int? IsSterilizeUser {
           get;
           set;
       }
@@ -63,6 +58,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsSterilizeUser",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsSterilizeUser {
           get;
           set;
       }

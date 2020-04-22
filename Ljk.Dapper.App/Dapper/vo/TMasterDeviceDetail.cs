@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterDeviceDetail",Remarks="")]
    public class TMasterDeviceDetail {
-      [LjkDapperField(Name="DetailID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="DetailID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? DetailID {
           get;
           set;
       }
-      [LjkDapperField(Name="DetailName",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400,Remarks="FlowID")]
+      [LjkDapperField(Name="DetailName",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400)]
       public virtual string DetailName {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="DetailMaintainCycleRemind",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="DetailMaintainCycleRemind",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? DetailMaintainCycleRemind {
           get;
           set;

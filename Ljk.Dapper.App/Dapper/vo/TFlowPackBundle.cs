@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowPackBundle",Remarks="")]
    public class TFlowPackBundle {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="PackBundleBarcode",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400,Remarks="FlowID")]
+      [LjkDapperField(Name="PackBundleBarcode",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=400)]
       public virtual string PackBundleBarcode {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="CreatedBy",SqlDbType=SqlDbType.NVarChar,MaxLength=100,Remarks="科室ID")]
+      [LjkDapperField(Name="CreatedBy",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
       public virtual string CreatedBy {
           get;
           set;

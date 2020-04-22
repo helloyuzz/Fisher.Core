@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowReservation",Remarks="")]
    public class TFlowReservation {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="OrgID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="OrgID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? OrgID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="AuditTime",SqlDbType=SqlDbType.DateTime,MaxLength=16,Remarks="科室ID")]
+      [LjkDapperField(Name="AuditTime",SqlDbType=SqlDbType.DateTime,MaxLength=16)]
       public virtual DateTime? AuditTime {
           get;
           set;
@@ -38,11 +38,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="State",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? State {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsReceiptPrinted",SqlDbType=SqlDbType.Bit,MaxLength=1)]
-      public virtual bool? IsReceiptPrinted {
           get;
           set;
       }
@@ -63,11 +58,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="CancelledTime",SqlDbType=SqlDbType.DateTime,MaxLength=16)]
       public virtual DateTime? CancelledTime {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="ReservationBatch",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
-      public virtual string ReservationBatch {
           get;
           set;
       }
@@ -96,8 +86,28 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
+      [LjkDapperField(Name="IsReceiptPrinted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsReceiptPrinted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="ReservationBatch",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
+      public virtual string ReservationBatch {
+          get;
+          set;
+      }
       [LjkDapperField(Name="ReferenceCode",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
       public virtual string ReferenceCode {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="Priority",SqlDbType=SqlDbType.Int,MaxLength=4)]
+      public virtual int? Priority {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="Remark",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
+      public virtual string Remark {
           get;
           set;
       }

@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TInventoryOneOffMaterialBatchInfos",Remarks="")]
    public class TInventoryOneOffMaterialBatchInfos {
-      [LjkDapperField(Name="BatchInfoID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="BatchInfoID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? BatchInfoID {
           get;
           set;
       }
-      [LjkDapperField(Name="ProductID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="ProductID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? ProductID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="ManufacturerID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="ManufacturerID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? ManufacturerID {
           get;
           set;

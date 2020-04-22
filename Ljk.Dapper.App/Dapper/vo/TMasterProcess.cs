@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterProcess",Remarks="")]
    public class TMasterProcess {
-      [LjkDapperField(Name="ProcessID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ProcessID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ProcessID {
           get;
           set;
       }
-      [LjkDapperField(Name="ProcessName",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=100,Remarks="FlowID")]
+      [LjkDapperField(Name="ProcessName",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=100)]
       public virtual string ProcessName {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="ProcessType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="ProcessType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? ProcessType {
           get;
           set;

@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TInventoryOneOffMaterialsIn",Remarks="")]
    public class TInventoryOneOffMaterialsIn {
-      [LjkDapperField(Name="OneOffMaterialsID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="OneOffMaterialsID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? OneOffMaterialsID {
           get;
           set;
       }
-      [LjkDapperField(Name="InnerBatchInfoID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="InnerBatchInfoID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? InnerBatchInfoID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="UnitPrice",SqlDbType=SqlDbType.Decimal,MaxLength=20,Remarks="科室ID")]
+      [LjkDapperField(Name="UnitPrice",SqlDbType=SqlDbType.Decimal,MaxLength=20)]
       public virtual Decimal? UnitPrice {
           get;
           set;
@@ -38,11 +38,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="SpecificationID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? SpecificationID {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="Remark",SqlDbType=SqlDbType.NVarChar,MaxLength=400)]
-      public virtual string Remark {
           get;
           set;
       }
@@ -68,6 +63,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="Remark",SqlDbType=SqlDbType.NVarChar,MaxLength=400)]
+      public virtual string Remark {
           get;
           set;
       }

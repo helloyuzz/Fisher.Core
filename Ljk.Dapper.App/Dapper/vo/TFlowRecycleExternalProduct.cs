@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowRecycleExternalProduct",Remarks="")]
    public class TFlowRecycleExternalProduct {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? FlowID {
           get;
           set;
@@ -26,18 +26,8 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="InstrumentQuantity",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="InstrumentQuantity",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? InstrumentQuantity {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="ImplantQuatity",SqlDbType=SqlDbType.Int,MaxLength=4)]
-      public virtual int? ImplantQuatity {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="SubpackageQuantity",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
-      public virtual int? SubpackageQuantity {
           get;
           set;
       }
@@ -81,11 +71,6 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="CleanType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
-      public virtual int? CleanType {
-          get;
-          set;
-      }
       [LjkDapperField(Name="CreatedTime",SqlDbType=SqlDbType.DateTime,MaxLength=16)]
       public virtual DateTime? CreatedTime {
           get;
@@ -111,6 +96,21 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
+      [LjkDapperField(Name="ImplantQuatity",SqlDbType=SqlDbType.Int,MaxLength=4)]
+      public virtual int? ImplantQuatity {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="SubpackageQuantity",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
+      public virtual int? SubpackageQuantity {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="CleanType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
+      public virtual int? CleanType {
+          get;
+          set;
+      }
       [LjkDapperField(Name="ProductGroupID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? ProductGroupID {
           get;
@@ -133,6 +133,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="OperationDoctor",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
       public virtual string OperationDoctor {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="SendUserPhone",SqlDbType=SqlDbType.NVarChar,MaxLength=40)]
+      public virtual string SendUserPhone {
           get;
           set;
       }

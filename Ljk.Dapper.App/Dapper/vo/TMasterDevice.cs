@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterDevice",Remarks="")]
    public class TMasterDevice {
-      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="DeviceID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? DeviceID {
           get;
           set;
       }
-      [LjkDapperField(Name="DeviceName",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=100,Remarks="FlowID")]
+      [LjkDapperField(Name="DeviceName",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=100)]
       public virtual string DeviceName {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="IsConnected",SqlDbType=SqlDbType.Bit,MaxLength=1,Remarks="科室ID")]
+      [LjkDapperField(Name="IsConnected",SqlDbType=SqlDbType.Bit,MaxLength=1)]
       public virtual bool? IsConnected {
           get;
           set;
@@ -81,6 +81,11 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
+      [LjkDapperField(Name="MinBDTime",SqlDbType=SqlDbType.Int,MaxLength=4)]
+      public virtual int? MinBDTime {
+          get;
+          set;
+      }
       [LjkDapperField(Name="MinReviewTime",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? MinReviewTime {
           get;
@@ -93,11 +98,6 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IntervalReviewTime",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? IntervalReviewTime {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="MinBDTime",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
-      public virtual int? MinBDTime {
           get;
           set;
       }

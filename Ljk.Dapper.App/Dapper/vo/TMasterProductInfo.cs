@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterProductInfo",Remarks="")]
    public class TMasterProductInfo {
-      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="ID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? ID {
           get;
           set;
       }
-      [LjkDapperField(Name="ProductID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="ProductID",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
       public virtual int? ProductID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="OrgID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="科室ID")]
+      [LjkDapperField(Name="OrgID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? OrgID {
           get;
           set;
@@ -56,26 +56,6 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="IsUniquePackage",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
-      public virtual bool? IsUniquePackage {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="UniqueBarcode",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
-      public virtual string UniqueBarcode {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsDynamicPackage",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
-      public virtual bool? IsDynamicPackage {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="CleanType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
-      public virtual int? CleanType {
-          get;
-          set;
-      }
       [LjkDapperField(Name="CreatedTime",SqlDbType=SqlDbType.DateTime,MaxLength=16)]
       public virtual DateTime? CreatedTime {
           get;
@@ -98,6 +78,26 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsUniquePackage",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsUniquePackage {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="UniqueBarcode",SqlDbType=SqlDbType.NVarChar,MaxLength=100)]
+      public virtual string UniqueBarcode {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsDynamicPackage",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsDynamicPackage {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="CleanType",SqlDbType=SqlDbType.Int,AllowDBNull =false,MaxLength=4)]
+      public virtual int? CleanType {
           get;
           set;
       }

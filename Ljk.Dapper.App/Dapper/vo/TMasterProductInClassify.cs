@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TMasterProductInClassify",Remarks="")]
    public class TMasterProductInClassify {
-      [LjkDapperField(Name="id",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="id",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? id {
           get;
           set;
       }
-      [LjkDapperField(Name="ClassifyID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="ClassifyID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? ClassifyID {
           get;
           set;
@@ -26,7 +26,7 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="UpdatedTime",SqlDbType=SqlDbType.DateTime,MaxLength=16,Remarks="科室ID")]
+      [LjkDapperField(Name="UpdatedTime",SqlDbType=SqlDbType.DateTime,MaxLength=16)]
       public virtual DateTime? UpdatedTime {
           get;
           set;

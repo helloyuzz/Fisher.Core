@@ -1,0 +1,1 @@
+﻿makecert -in "Ljk.Dapper.Mode.Generator" -sk "Ljk.Dapper.Mode.Generator" -pe -ss My -sr "CurrentUser" -n "CN=Ljk.Dapper.Mode.Generator,E=yusais_life@qq.com"

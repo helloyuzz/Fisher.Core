@@ -6,12 +6,12 @@ namespace CSSD.Web.API.Dapper.vo {
    [Serializable]
    [LjkDapperField(Name="TFlowPoductInFlow",Remarks="")]
    public class TFlowPoductInFlow {
-      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4,Remarks="序号")]
+      [LjkDapperField(Name="FlowID",SqlDbType=SqlDbType.Int,IsPrimaryKey = true,KEY_SEQ=1,AllowDBNull =false,MaxLength=4)]
       public virtual int? FlowID {
           get;
           set;
       }
-      [LjkDapperField(Name="PriorityID",SqlDbType=SqlDbType.Int,MaxLength=4,Remarks="FlowID")]
+      [LjkDapperField(Name="PriorityID",SqlDbType=SqlDbType.Int,MaxLength=4)]
       public virtual int? PriorityID {
           get;
           set;
@@ -26,13 +26,8 @@ namespace CSSD.Web.API.Dapper.vo {
           get;
           set;
       }
-      [LjkDapperField(Name="IsRecalled",SqlDbType=SqlDbType.Bit,MaxLength=1,Remarks="科室ID")]
+      [LjkDapperField(Name="IsRecalled",SqlDbType=SqlDbType.Bit,MaxLength=1)]
       public virtual bool? IsRecalled {
-          get;
-          set;
-      }
-      [LjkDapperField(Name="IsAbnormal",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
-      public virtual bool? IsAbnormal {
           get;
           set;
       }
@@ -58,6 +53,11 @@ namespace CSSD.Web.API.Dapper.vo {
       }
       [LjkDapperField(Name="IsDeleted",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
       public virtual bool? IsDeleted {
+          get;
+          set;
+      }
+      [LjkDapperField(Name="IsAbnormal",SqlDbType=SqlDbType.Bit,AllowDBNull =false,MaxLength=1)]
+      public virtual bool? IsAbnormal {
           get;
           set;
       }
