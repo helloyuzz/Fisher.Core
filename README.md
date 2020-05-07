@@ -2,7 +2,7 @@
 
 ﻿**create a new repository:**
 ```md
-echo "# Ljk.Dapper" >> README.md
+echo "# My.Dapper" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
