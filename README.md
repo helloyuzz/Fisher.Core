@@ -18,7 +18,7 @@ git push -u origin master
 ```
 
 
-### Only Two Methods:
+- [x] __Only Two Methods:__
 ```C#
 SaveResult  saveResult  = Fisher.Save();  ==> db.Insert();
                                           ==> db.Update();
