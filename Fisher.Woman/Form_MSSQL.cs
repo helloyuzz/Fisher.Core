@@ -683,7 +683,7 @@ namespace Fisher.Woman {
 
                     if(cbx_AutoSaveToFile.Checked == true) {
                         if(Directory.Exists(tbx_Project_SavePath.Text) == false) {
-                            MessageBox.Show(this,"工程文件夹不存在。","系统提示");
+                            MessageBox.Show(this,"VS工程文件夹(.\\DbLibrary\\)不存在。","系统提示");
                             tbx_Project_SavePath.Focus();
                             return;
                         }
@@ -798,14 +798,14 @@ namespace Fisher.Woman {
             tbx_VO_Filename.Text = vofile + ".cs";
             //temp.Append("using CSSD.Web.API.Dapper.vo;\r\n");
             temp.Append("using System;\r\n");
-            temp.Append("using My.Dapper;\r\n");
+            temp.Append("using Fisher.Core;\r\n");
             temp.Append("using System.Data;\r\n\r\n");
             //temp.Append("using System.Linq;\r\n");
             //temp.Append("using System.Threading.Tasks;\r\n");
 
-            temp.Append("namespace CSSD.Web.API.Dapper.vo {\r\n");
+            temp.Append("namespace Fisher.Core.DbLibrary {\r\n");
             temp.Append("   [Serializable]\r\n");
-            temp.Append(string.Format("   [MyDapperField(Name=\"{0}\",Remarks=\"{1}\")]\r\n",smTable.TableName,smTable.Remarks));            
+            temp.Append(string.Format("   [FisherField(Name=\"{0}\",Remarks=\"{1}\")]\r\n",smTable.TableName,smTable.Remarks));            
             temp.Append("   public class ").Append(tbx_Prefix.Text).Append(smTable.TableName).Append(" {\r\n");//.Append(":DBItem{\r\n");
             //temp.Append("   public class ").Append(smTable.Name).Append(":DBItem{\r\n");
             if(false) {
@@ -903,7 +903,7 @@ namespace Fisher.Woman {
             }
 
 
-            return string.Format("[MyDapperField({0})]",getDapperFlag);
+            return string.Format("[FisherField({0})]",getDapperFlag);
         }
 
         private string createDAO(string sechemaName) {
@@ -1146,8 +1146,8 @@ namespace Fisher.Woman {
         }
 
         private void menuItem_MySQL_Click(object sender,EventArgs e) {
-            Form_MySQL frmMySQL = new Form_MySQL();
-            frmMySQL.ShowDialog();
+            //Form_MySQL frmMySQL = new Form_MySQL();
+            //frmMySQL.ShowDialog();
         }
 
         private void btn_table_Click(object sender,EventArgs e) {
