@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Core", "Fisher.Core\Fisher.Core.csproj", "{6A2EDCE6-7EF0-4334-B86C-B06FD74A1DAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Man", "Fisher.Man\Fisher.Man.csproj", "{DB79814E-8A89-4E26-A646-EA1968F817A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.LadyFirst", "Fisher.LadyFirst\Fisher.LadyFirst.csproj", "{DB79814E-8A89-4E26-A646-EA1968F817A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.ObjGenerator", "Fisher.Woman\Fisher.Woman.csproj", "{02368FD1-1D86-4EC3-9FC6-E72A09180E23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Woman", "Fisher.Woman\Fisher.Woman.csproj", "{02368FD1-1D86-4EC3-9FC6-E72A09180E23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

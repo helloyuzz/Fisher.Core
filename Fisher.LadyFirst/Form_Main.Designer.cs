@@ -1,4 +1,4 @@
-﻿namespace Fisher.Man {
+﻿namespace Fisher.LadyFirst {
     partial class Form_Main {
         /// <summary>
         /// Required designer variable.

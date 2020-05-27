@@ -2,7 +2,7 @@
 using System.Data;
 using Fisher.Core;
 
-namespace CSSD.Web.API.Dapper.vo {
+namespace Fisher.LadyFirst {
     [Serializable]
     [FisherField(Name = "TSysConfiguration",Remarks = "")]
     public class TSysConfiguration {

@@ -1,6 +1,4 @@
-﻿using CSSD.Web.API;
-using CSSD.Web.API.Dapper.vo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Fisher.Man {
+namespace Fisher.LadyFirst {
     class Program {
         /// <summary>
         /// 应用程序的主入口点。

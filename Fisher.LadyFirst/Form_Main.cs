@@ -1,6 +1,4 @@
-﻿using CSSD.Web.API;
-using CSSD.Web.API.Dapper.vo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fisher.Core;
 
-namespace Fisher.Man {
+namespace Fisher.LadyFirst {
     public partial class Form_Main:Form {
         public Form_Main() {
             InitializeComponent();

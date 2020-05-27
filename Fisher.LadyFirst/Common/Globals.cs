@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSSD.Web.API
+namespace Fisher.LadyFirst
 {
     public class Globals
     {
