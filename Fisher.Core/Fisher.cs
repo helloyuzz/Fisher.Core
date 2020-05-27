@@ -9,7 +9,7 @@ using System.Reflection;
 /// </summary>
 namespace Fisher.Core {
     public static partial class Fisher {
-        public static FisherResult Insert<T>(this IDbConnection connection,T vo) {
+        public static FisherResult Insert<T>(this IDbConnection conn,T vo) {
             FisherResult result = new FisherResult();
             FisherSchema schema = FisherUtil.ParseSchema(vo.GetType());
             FisherField pkField = null;
@@ -60,11 +60,11 @@ namespace Fisher.Core {
             result.CommondText = sqlString;
             if(result.ExecException == null) {
                 try {
-                    if(connection.State == ConnectionState.Closed) {
-                        connection.Open();
+                    if(conn.State == ConnectionState.Closed) {
+                        conn.Open();
                     }
 
-                    IDbCommand command = connection.CreateCommand();
+                    IDbCommand command = conn.CreateCommand();
                     command.CommandText = sqlString;
                     int resultCount = command.ExecuteNonQuery();
                     if(resultCount > 0) {

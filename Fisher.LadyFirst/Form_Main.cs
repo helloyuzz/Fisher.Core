@@ -53,8 +53,8 @@ namespace Fisher.LadyFirst {
 
             FisherResult<TSysConfiguration> result = null;
 
-            using(IDbConnection dbConnection = new SqlConnection(Globals.SqlConnectionString)) {
-                result = dbConnection.Select<TSysConfiguration>(pageSize,pageIndex);
+            using(IDbConnection conn = new SqlConnection(Globals.SqlConnectionString)) {
+                result = conn.Select<TSysConfiguration>(pageSize,pageIndex);
             }
             dgv.DataSource = result.Result;
             tbx_PageIndex.Text = result.PageIndex.ToString();

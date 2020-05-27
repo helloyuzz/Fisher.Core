@@ -374,108 +374,7 @@ namespace Fisher.Woman {
             }
         }
 
-        private void uc_Build_Dgv(object sender,EventArgs e) {
-            //StringBuilder temp = new StringBuilder();
-            //foreach(DataRow getRow in list_Schema.SelectedIndices) {
-            //    SmTable smTable = getSmTable(getRow["Name"].ToString(),null);
-
-
-            //    if(smTable == null) {
-            //        continue;
-            //    }
-            //    temp.Append("void loadList(){\r\n");
-            //    temp.Append("   dgv.Rows.Clear();\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("   string sqlCondition = \"\";\r\n");
-            //    temp.Append("   string sortCondition = \"\";\r\n");
-            //    temp.Append("   IList getList = DAOUtil.GetList(typeof(").Append(tbx_类前缀.Text).Append(smTable.TableName).Append("),sqlCondition,sortCondition);\r\n");
-            //    //temp.Append("   List<").Append(tbx_类前缀.Text).Append(smTable.Name).Append("> getList = DBToolkit.Get").Append(tbx_类前缀.Text).Append(smTable.Name).Append("(sqlCondition,false,sortCondition);\r\n");
-            //    temp.Append("   foreach(").Append(tbx_类前缀.Text).Append(smTable.TableName).Append(" getItem in getList) {\r\n");
-            //    temp.Append("       dgv.Rows.Add();\r\n");
-
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        if(smColumn.Name.Equals("VoContent")) {
-            //            continue;
-            //        }
-            //        if(smColumn.Name.Equals("ModifyTime")) {
-            //            continue;
-            //        }
-            //        temp.Append("       dgv.Rows[dgv.Rows.Count - 1].Cells[\"").Append(smColumn.Name).Append("_Column\"].Value = getItem.").Append(smColumn.Name).Append(";\r\n");
-            //    }
-
-            //    temp.Append("   }\r\n");
-            //    temp.Append("}\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-
-            //    temp.Append("   List<").Append(tbx_类前缀.Text).Append(smTable.TableName).Append("> getList = new List<").Append(tbx_类前缀.Text).Append(smTable.TableName).Append(">();\r\n");
-            //    temp.Append("   foreach(DataGridViewRow getRow in dgv.Rows) {\r\n");
-            //    temp.Append("       ").Append(tbx_类前缀.Text).Append(smTable.TableName).Append(" getItem = new ").Append(tbx_类前缀.Text).Append(smTable.TableName).Append("();\r\n");
-            //    temp.Append("\r\n");
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        if(smColumn.Name.Equals("VoContent")) {
-            //            continue;
-            //        }
-            //        if(smColumn.Name.Equals("ModifyTime")) {
-            //            continue;
-            //        }
-            //        temp.Append("       getItem.").Append(smColumn.Name).Append(" = ").Append(dbTypeToControl("getRow.Cells[\"","_Column\"].Value",smColumn,true)).Append("\r\n");
-            //    }
-            //    temp.Append("       getList.Add(getItem);\r\n");
-            //    temp.Append("   }\r\n");
-            //}
-            //tbx_DGV_Code.Text = temp.ToString();
-            //showPage.SelectedTab = tp_DGV;
-        }
-
-        private void uc_Build_Form(object sender,EventArgs e) {
-            //StringBuilder temp = new StringBuilder();
-            //foreach(DataRow getRow in list_Schema.SelectedIndices) {
-            //    SmTable smTable = getSmTable(getRow["Name"].ToString());
-
-            //    if(smTable == null) {
-            //        return;
-            //    }
-
-            //    temp.Append(tbx_类前缀.Text).Append(smTable.TableName).Append(" getValue = new ").Append(tbx_类前缀.Text).Append(smTable.TableName).Append("();\r\n");
-            //    temp.Append("\r\n");
-
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        if(smColumn.Name.Equals("VoContent")) {
-            //            continue;
-            //        }
-            //        if(smColumn.Name.Equals("ModifyTime")) {
-            //            continue;
-            //        }
-            //        temp.Append("getValue.").Append(smColumn.Name).Append(" = ").Append(dbTypeToControl("tbx_",".Text.Trim()",smColumn,false)).Append("\r\n");
-            //    }
-            //    temp.Append("\r\n");
-            //    temp.Append("bool saveResult = DBToolkit.Save").Append(tbx_类前缀.Text).Append(smTable.TableName).Append("(getValue);\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("if(saveResult == true) {\r\n");
-            //    temp.Append("   MessageBox.Show(this,\"操作成功\",\"系统提示\",MessageBoxButtons.OK,MessageBoxIcon.Information);\r\n");
-            //    temp.Append("   loadList();\r\n");
-            //    temp.Append("}\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-
-            //    temp.Append("string uuid = BIMPUtil.IngoreNull(dgv.Rows[e.RowIndex].Cells[\"UUID_Column\"].Value);\r\n");
-            //    temp.Append(tbx_类前缀.Text).Append(smTable.TableName).Append(" getItem = DBToolkit.Get").Append(tbx_类前缀.Text).Append(smTable.TableName).Append("(uuid,false);\r\n");
-            //    temp.Append("\r\n");
-
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        string flowfix = getControlValuefix(smColumn.DbType);
-            //        temp.Append("tbx_").Append(smColumn.Name).Append(flowfix).Append("getItem.").Append(smColumn.Name).Append(";\r\n");
-            //    }
-            //}
-            ////temp.Append("}\r\n");
-            //tbx_Form_Code.Text = temp.ToString();
-        }
+     
 
         private string getControlValuefix(SqlDbType type) {
             if(type == SqlDbType.DateTime) {
@@ -484,156 +383,7 @@ namespace Fisher.Woman {
             return ".Text = ";
         }
 
-        string dbTypeToControl(string prefix,string flowfix,SmField smColumn,bool getAction) {
-            string temp = "";
-
-            if(smColumn.DbType.Equals(typeof(string))) {
-                if(getAction == false) {
-                    temp = prefix + smColumn.Name + flowfix + ";";
-                } else {
-                    temp = "BIMPUtil.IngoreNull(" + prefix + smColumn.Name + flowfix + ");";
-                }
-            } else if(smColumn.DbType.Equals(typeof(DateTime))) {
-                temp = "BIMPUtil.ParseDateTime(" + prefix + smColumn.Name + flowfix + ");";
-            } else if(smColumn.DbType.Equals(typeof(Int16))) {
-                temp = "BIMPUtil.ParseInt(" + prefix + smColumn.Name + flowfix + ");";
-            } else if(smColumn.DbType.Equals(typeof(int))) {
-                temp = "BIMPUtil.ParseInt(" + prefix + smColumn.Name + flowfix + ");";
-            } else if(smColumn.DbType.Equals(typeof(float))) {
-                temp = "BIMPUtil.ParseFloat(" + prefix + smColumn.Name + flowfix + ",2);";
-            } else if(smColumn.DbType.Equals(typeof(bool))) {
-                temp = "BIMPUtil.ParseBool(" + prefix + smColumn.Name + flowfix + ");";
-            }
-
-            return temp;
-        }
-
-        private void bbtn_BuildAll_Click(object sender,EventArgs e) {
-            //btn_BuildDAO_Click(sender,e);
-            //btn_BuildDgv_Click(sender,e);
-            //btn_BuildForm_Click(sender,e);
-            //btn_BuildVO_Click(sender,e);
-            //btn_BuildFiled_Click(sender,e);
-            //showPage.SelectedTab = VO_Page;
-        }
-
-        private void btn_BuildFiled_Click(object sender,EventArgs e) {
-            //StringBuilder temp = new StringBuilder();
-            //foreach(DataRow getRow in list_Schema.SelectedIndices) {
-            //    SmTable smTable = getSmTable(getRow["Name"].ToString());
-            //    if(smTable == null) {
-            //        continue;
-            //    }
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        temp.Append(smColumn.Name).Append("\r\n");
-            //    }
-
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        temp.Append(smColumn.Name).Append("_Column\r\n");
-            //    }
-
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-            //    temp.Append("\r\n");
-
-            //    foreach(SmField smColumn in smTable.Fields) {
-            //        temp.Append("tbx_").Append(smColumn.Name).Append("\r\n");
-            //    }
-            //}
-            //tbx_字段列表.Text = temp.ToString();
-        }
-
-        private void btn_Create_Click(object sender,EventArgs e) {
-
-        }
-
-        private void uc_Build_TableName(object sender,EventArgs e) {
-            //StringBuilder temp = new StringBuilder();
-
-            //temp.Append("using System;\r\n");
-            //temp.Append("namespace com.cgWorkstudio.BIMP.Client.vo {\r\n");
-            //temp.Append("   [Serializable]\r\n");
-            //temp.Append("   internal class BIMPDict_Sechma {\r\n");
-
-            //int n = 0;
-            //foreach(DataRow node in list_Schema.SelectedIndices) {
-            //    string getText = node["Name"].ToString();
-
-            //    Console.WriteLine(getText);
-            //    if(getText.StartsWith("App_") || getText.StartsWith("Log_")) {
-            //    } else {
-            //        char getChar;
-            //        char.TryParse(getText,out getChar);
-
-            //        if((getChar >= 'a' && getChar <= 'z') || getChar >= 'A' && getChar <= 'Z') {
-            //            continue;
-            //        }
-            //    }
-
-            //    temp.Append("   static string temp").Append(n).Append(" = string.Empty;\r\n");
-            //    temp.Append("   internal static string ").Append(getText).Append(" {\r\n");
-            //    temp.Append("       get {\r\n");
-            //    temp.Append("           if(string.IsNullOrEmpty(temp").Append(n).Append(")) {\r\n");
-            //    temp.Append("               temp").Append(n).Append(" = \"").Append(getText).Append("\";\r\n");
-            //    temp.Append("           }\r\n");
-            //    temp.Append("           return temp").Append(n).Append(";\r\n");
-            //    temp.Append("       }\r\n");
-            //    temp.Append("   }\r\n");
-            //    n++;
-            //}
-            //temp.Append("    }\r\n");
-            //temp.Append("}\r\n");
-
-            //tbx_表名.Text = temp.ToString();
-
-            //showPage.SelectedTab = tp_TableName;
-        }
-
-        private void dbmenu_Click(object sender,EventArgs e) {
-
-        }
-
-        private void menuItem_ChangYong_Click(object sender,EventArgs e) {
-            //showPage.SelectedTab = tp_常用数据;
-
-            //StringBuilder tmp = new StringBuilder();
-            //tmp.Append("using System;\r\n");
-            //tmp.Append("using System.Collections.Generic;\r\n");
-            //tmp.Append("using System.Text;\r\n");
-
-            //tmp.Append("namespace com.cgWorkstudio.BIMP.Client.vo {\r\n");
-            //tmp.Append("    /// <summary>\r\n");
-            //tmp.Append("    /// 常量定义常用资料（基础数据）\r\n");
-            //tmp.Append("    /// </summary>\r\n");
-            //tmp.Append("    [Serializable]\r\n");
-            //tmp.Append("    public class BIMPDict_Common {\r\n");
-
-            //SqlCommand dbCmd = new SqlCommand();
-            //using(SqlConnection dbConn = new SqlConnection(sqlString)) {
-            //    dbConn.Open();
-            //    dbCmd.Connection = dbConn;
-            //    dbCmd.CommandText = "select [Code],[Text] from [基础数据_常用资料] where [Type] = 'Group'";
-
-            //    SqlDataReader dbReader = dbCmd.ExecuteReader();
-            //    while(dbReader.Read()) {
-            //        string uuid = MyToolkit.IngoreNull(dbReader["Code"]);
-            //        string txt = MyToolkit.IngoreNull(dbReader["Text"]);
-
-            //        tmp.Append("            public static string ").Append(txt).Append(" = \"").Append(uuid).Append("\";\r\n");
-            //    }
-            //    dbReader.Close();
-            //    dbReader = null;
-
-            //    tmp.Append("    }\r\n");
-            //    tmp.Append("}\r\n");
-            //    dbConn.Close();
-            //}
-            //tbx_常用数据.Text = tmp.ToString();
-        }
+     
         string sqlString {
             get {
                 return string.Format("Server = {0},{4};Database = {1};User Id = {2};Password = {3};",tbx_MSSQL_ServerIP.Text,tbx_MSSQL_Schema.Text,tbx_MSSQL_User.Text,tbx_MSSQL_Pwd.Text,tbx_MSSQL_Port.Text); 
@@ -754,8 +504,7 @@ namespace Fisher.Woman {
 
             if(folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
                 if(Directory.Exists(folderBrowserDialog1.SelectedPath) == true) {
-                    tbx_Project_SavePath.Text = folderBrowserDialog1.SelectedPath;
-                    SaveConfig(false,true);
+                    tbx_Project_SavePath.Text = folderBrowserDialog1.SelectedPath;                    
                 }
             }
         }
@@ -1515,6 +1264,11 @@ namespace Fisher.Woman {
             tbx_Project_SavePath.Enabled = cbx_AutoSaveToFile.Checked;
             tbx_VO_Filename.Enabled = cbx_AutoSaveToFile.Checked;
             btn_SelectFolder.Enabled = cbx_AutoSaveToFile.Checked;
+        }
+
+        private void tbx_Project_SavePath_TextChanged(object sender,EventArgs e) {
+            Application.DoEvents();
+            SaveConfig(false,true);
         }
     }
 }

@@ -48,10 +48,11 @@
             // 
             // dgv
             // 
+            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Location = new System.Drawing.Point(16, 26);
-            this.dgv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv.Margin = new System.Windows.Forms.Padding(4);
             this.dgv.Name = "dgv";
             this.dgv.RowTemplate.Height = 23;
             this.dgv.Size = new System.Drawing.Size(1337, 728);
@@ -60,7 +61,7 @@
             // btn_Select
             // 
             this.btn_Select.Location = new System.Drawing.Point(1361, 26);
-            this.btn_Select.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Select.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(161, 39);
             this.btn_Select.TabIndex = 1;
@@ -81,7 +82,7 @@
             // tbx_PageSize
             // 
             this.tbx_PageSize.Location = new System.Drawing.Point(349, 779);
-            this.tbx_PageSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_PageSize.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_PageSize.Name = "tbx_PageSize";
             this.tbx_PageSize.Size = new System.Drawing.Size(132, 25);
             this.tbx_PageSize.TabIndex = 3;
@@ -90,7 +91,7 @@
             // btn_FirstPage
             // 
             this.btn_FirstPage.Location = new System.Drawing.Point(907, 778);
-            this.btn_FirstPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_FirstPage.Margin = new System.Windows.Forms.Padding(4);
             this.btn_FirstPage.Name = "btn_FirstPage";
             this.btn_FirstPage.Size = new System.Drawing.Size(100, 29);
             this.btn_FirstPage.TabIndex = 4;
@@ -101,7 +102,7 @@
             // btn_PrevPage
             // 
             this.btn_PrevPage.Location = new System.Drawing.Point(1015, 778);
-            this.btn_PrevPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_PrevPage.Margin = new System.Windows.Forms.Padding(4);
             this.btn_PrevPage.Name = "btn_PrevPage";
             this.btn_PrevPage.Size = new System.Drawing.Size(100, 29);
             this.btn_PrevPage.TabIndex = 5;
@@ -112,7 +113,7 @@
             // btn_NextPage
             // 
             this.btn_NextPage.Location = new System.Drawing.Point(1123, 778);
-            this.btn_NextPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_NextPage.Margin = new System.Windows.Forms.Padding(4);
             this.btn_NextPage.Name = "btn_NextPage";
             this.btn_NextPage.Size = new System.Drawing.Size(100, 29);
             this.btn_NextPage.TabIndex = 6;
@@ -123,7 +124,7 @@
             // btn_LastPage
             // 
             this.btn_LastPage.Location = new System.Drawing.Point(1231, 778);
-            this.btn_LastPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_LastPage.Margin = new System.Windows.Forms.Padding(4);
             this.btn_LastPage.Name = "btn_LastPage";
             this.btn_LastPage.Size = new System.Drawing.Size(100, 29);
             this.btn_LastPage.TabIndex = 7;
@@ -134,7 +135,7 @@
             // tbx_PageIndex
             // 
             this.tbx_PageIndex.Location = new System.Drawing.Point(581, 779);
-            this.tbx_PageIndex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_PageIndex.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_PageIndex.Name = "tbx_PageIndex";
             this.tbx_PageIndex.Size = new System.Drawing.Size(132, 25);
             this.tbx_PageIndex.TabIndex = 8;
@@ -142,7 +143,7 @@
             // tbx_TotalPage
             // 
             this.tbx_TotalPage.Location = new System.Drawing.Point(747, 779);
-            this.tbx_TotalPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_TotalPage.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_TotalPage.Name = "tbx_TotalPage";
             this.tbx_TotalPage.Size = new System.Drawing.Size(132, 25);
             this.tbx_TotalPage.TabIndex = 9;
@@ -170,7 +171,7 @@
             // tbx_RecordCount
             // 
             this.tbx_RecordCount.Location = new System.Drawing.Point(49, 779);
-            this.tbx_RecordCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_RecordCount.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_RecordCount.Name = "tbx_RecordCount";
             this.tbx_RecordCount.Size = new System.Drawing.Size(132, 25);
             this.tbx_RecordCount.TabIndex = 12;
@@ -198,7 +199,7 @@
             // tbx_SqlCondition
             // 
             this.tbx_SqlCondition.Location = new System.Drawing.Point(135, 834);
-            this.tbx_SqlCondition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_SqlCondition.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_SqlCondition.Name = "tbx_SqlCondition";
             this.tbx_SqlCondition.Size = new System.Drawing.Size(744, 25);
             this.tbx_SqlCondition.TabIndex = 15;
@@ -217,7 +218,7 @@
             // tbx_Orderby
             // 
             this.tbx_Orderby.Location = new System.Drawing.Point(135, 870);
-            this.tbx_Orderby.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_Orderby.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_Orderby.Name = "tbx_Orderby";
             this.tbx_Orderby.Size = new System.Drawing.Size(347, 25);
             this.tbx_Orderby.TabIndex = 17;
@@ -226,7 +227,7 @@
             // btn_GetRow
             // 
             this.btn_GetRow.Location = new System.Drawing.Point(1361, 72);
-            this.btn_GetRow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_GetRow.Margin = new System.Windows.Forms.Padding(4);
             this.btn_GetRow.Name = "btn_GetRow";
             this.btn_GetRow.Size = new System.Drawing.Size(161, 36);
             this.btn_GetRow.TabIndex = 18;
@@ -237,7 +238,7 @@
             // btn_Add
             // 
             this.btn_Add.Location = new System.Drawing.Point(1361, 116);
-            this.btn_Add.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Add.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(161, 39);
             this.btn_Add.TabIndex = 19;
@@ -271,7 +272,7 @@
             this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.dgv);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Main";
             this.Text = "Fisher SampleApplication";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();

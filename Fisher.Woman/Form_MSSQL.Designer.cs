@@ -253,6 +253,7 @@
             this.tbx_Project_SavePath.Size = new System.Drawing.Size(751, 25);
             this.tbx_Project_SavePath.TabIndex = 1;
             this.tbx_Project_SavePath.Text = "D:\\bimpApp_wfx\\code\\web\\Hidistro.Web\\db_class";
+            this.tbx_Project_SavePath.TextChanged += new System.EventHandler(this.tbx_Project_SavePath_TextChanged);
             // 
             // label6
             // 
