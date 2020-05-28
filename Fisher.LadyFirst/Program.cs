@@ -5,8 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Fisherman.Core;
 
-namespace Fisher.LadyFirst {
+namespace Fisherman.LadyFirst {
     class Program {
         /// <summary>
         /// 应用程序的主入口点。
@@ -15,6 +16,9 @@ namespace Fisher.LadyFirst {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Fisher.SetConnectionString(Globals.SqlConnectionString);
+
             Application.Run(new Form_Main());
         }
         //static void Main(string[] args) {

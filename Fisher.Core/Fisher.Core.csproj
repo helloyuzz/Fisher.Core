@@ -7,7 +7,7 @@
     <ProjectGuid>{6A2EDCE6-7EF0-4334-B86C-B06FD74A1DAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fisher.Core</RootNamespace>
+    <RootNamespace>Fisherman.Core</RootNamespace>
     <AssemblyName>Fisher.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,15 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\NotAllowDBNullException.cs" />
-    <Compile Include="Common\IllegalFieldException.cs" />
-    <Compile Include="Common\PrimaryKeyIllegalTypeException.cs" />
-    <Compile Include="Common\PrimaryKeyIsNullException.cs" />
-    <Compile Include="Fisher.cs" />
-    <Compile Include="FisherField.cs" />
-    <Compile Include="FisherResult.cs" />
-    <Compile Include="FisherSchema.cs" />
-    <Compile Include="FisherUtil.cs" />
+    <Compile Include="Var\ConnectionStringIsNull.cs" />
+    <Compile Include="Var\FieldNotAllowNull.cs" />
+    <Compile Include="Var\IllegalField.cs" />
+    <Compile Include="Var\IllegalType.cs" />
+    <Compile Include="Var\PaginationNeedOrderBy.cs" />
+    <Compile Include="Var\PKIsNull.cs" />
+    <Compile Include="Core\FisherCore.cs" />
+    <Compile Include="Core\FisherField.cs" />
+    <Compile Include="Core\FisherResult.cs" />
+    <Compile Include="Core\FisherSchema.cs" />
+    <Compile Include="Util\FisherUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\SysTrace.cs" />
   </ItemGroup>
@@ -61,6 +63,7 @@
     <None Include="articles\intro.md" />
     <None Include="articles\toc.md" />
     <None Include="docfx.json" />
+    <Compile Include="Impl\Fisher.cs" />
     <None Include="index.md" />
     <None Include="packages.config" />
     <None Include="toc.yml" />

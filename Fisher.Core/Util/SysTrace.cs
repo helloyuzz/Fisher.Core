@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Fisher.Core {
+namespace Fisherman.Core {
     public class SysTrace {
         private static string _enableSystemTraceLog = "";
         private static string EnableSystemTraceLog {

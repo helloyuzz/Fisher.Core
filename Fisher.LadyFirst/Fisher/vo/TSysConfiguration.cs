@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
-using Fisher.Core;
+using Fisherman.Core;
 
-namespace Fisher.LadyFirst {
+namespace Fisherman.LadyFirst {
     [Serializable]
     [FisherField(Name = "TSysConfiguration",Remarks = "")]
     public class TSysConfiguration {

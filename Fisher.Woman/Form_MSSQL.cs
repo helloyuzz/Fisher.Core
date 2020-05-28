@@ -547,12 +547,12 @@ namespace Fisher.Woman {
             tbx_VO_Filename.Text = vofile + ".cs";
             //temp.Append("using CSSD.Web.API.Dapper.vo;\r\n");
             temp.Append("using System;\r\n");
-            temp.Append("using Fisher.Core;\r\n");
+            temp.Append("using Fisherman.Core;\r\n");
             temp.Append("using System.Data;\r\n\r\n");
             //temp.Append("using System.Linq;\r\n");
             //temp.Append("using System.Threading.Tasks;\r\n");
 
-            temp.Append("namespace Fisher.Core.DbLibrary {\r\n");
+            temp.Append("namespace App.DbLibrary {\r\n");
             temp.Append("   [Serializable]\r\n");
             temp.Append(string.Format("   [FisherField(Name=\"{0}\",Remarks=\"{1}\")]\r\n",smTable.TableName,smTable.Remarks));            
             temp.Append("   public class ").Append(tbx_Prefix.Text).Append(smTable.TableName).Append(" {\r\n");//.Append(":DBItem{\r\n");

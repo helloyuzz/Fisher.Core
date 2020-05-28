@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DB79814E-8A89-4E26-A646-EA1968F817A4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Fisher.Man</RootNamespace>
+    <RootNamespace>Fisherman.Man</RootNamespace>
     <AssemblyName>Fisher.Man</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

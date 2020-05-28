@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fisher.LadyFirst
+namespace Fisherman.LadyFirst
 {
     public class User
     {

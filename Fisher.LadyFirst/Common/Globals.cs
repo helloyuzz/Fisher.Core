@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fisher.LadyFirst
+namespace Fisherman.LadyFirst
 {
     public class Globals
     {

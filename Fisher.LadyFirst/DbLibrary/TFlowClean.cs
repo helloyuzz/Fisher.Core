@@ -1,8 +1,8 @@
 using System;
-using Fisher.Core;
+using Fisherman.Core;
 using System.Data;
 
-namespace Fisher.Core.DbLibrary {
+namespace App.DbLibrary {
    [Serializable]
    [FisherField(Name="TFlowClean",Remarks="")]
    public class TFlowClean {

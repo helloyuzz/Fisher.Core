@@ -8,24 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Fisher.Core;
+using Fisherman.Core;
+using Fisherman.LadyFirst;
 
-namespace Fisher.LadyFirst {
+namespace Fisherman.LadyFirst {
     public partial class Form_Main:Form {
+        int totalPage = -1;
         public Form_Main() {
             InitializeComponent();
         }
-
-        private void btn_Select_Click(object sender,EventArgs e) {
-            //LjkResult<TSysConfiguration> list = null;
-
-            //using(IDbConnection dbConnection = new SqlConnection(Globals.SqlConnectionString)) {
-            //    list = dbConnection.Select<TSysConfiguration>();
-            //}
-            //dgv.DataSource = list.Result;
-        }
-
-        int totalPage = -1;
+        
         private void btn_PageClicked(object sender,EventArgs e) {
             int pageSize = FisherUtil.ParseInt(tbx_PageSize.Text,10);
             int pageIndex = FisherUtil.ParseInt(tbx_PageIndex.Text,1);
@@ -51,20 +43,13 @@ namespace Fisher.LadyFirst {
                 pageIndex = totalPage;
             }
 
-            FisherResult<TSysConfiguration> result = null;
+            FisherResult<TSysConfiguration> result = Fisher.Query<TSysConfiguration>(tbx_SqlCondition.Text,null,pageSize,pageIndex);
 
-            using(IDbConnection conn = new SqlConnection(Globals.SqlConnectionString)) {
-                result = conn.Select<TSysConfiguration>(pageSize,pageIndex);
-            }
             dgv.DataSource = result.Result;
             tbx_PageIndex.Text = result.PageIndex.ToString();
             tbx_RecordCount.Text = result.TotalRecord.ToString();
-
-            totalPage = result.TotalRecord / result.PageSize;
-            if(result.TotalRecord % result.PageSize > 0) {
-                totalPage++;
-            }            
-            tbx_TotalPage.Text = totalPage.ToString();
+            tbx_TotalPage.Text = result.TotalPage.ToString();
+            totalPage = result.TotalPage;
         }
 
         private void btn_GetRow_Click(object sender,EventArgs e) {
@@ -85,12 +70,12 @@ namespace Fisher.LadyFirst {
                 IsDisabled=false
 
             };
-            using(IDbConnection dbConnection = new SqlConnection(Globals.SqlConnectionString)) {
-                result = dbConnection.Insert<TSysConfiguration>(sysConfiguration);
-            }
-            if(result.ExecResult == Result.OK) {
+            //using(IDbConnection dbConnection = new SqlConnection(Globals.SqlConnectionString)) {
+            //    result = dbConnection.Insert<TSysConfiguration>(sysConfiguration);
+            //}
+            //if(result.ExecResult == Result.OK) {
 
-            }
+            //}
         }
     }
 }
