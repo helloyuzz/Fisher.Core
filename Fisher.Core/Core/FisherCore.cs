@@ -17,17 +17,17 @@ namespace Fisherman.Core {
             string sqlString = string.Format("insert into [{0}](",schema.SchemaName);
             string valueString = " values(";
             bool isFirstRow = true;
-            foreach(FisherField dapperField in schema.Fields) {
-                if(dapperField.KEY_SEQ > 0 || dapperField.SqlDbType == SqlDbType.UniqueIdentifier) {   // 自增及UUID类型主键，跳过
-                    pkField = dapperField;
+            foreach(FisherField fisherField in schema.Fields) {
+                if(fisherField.KEY_SEQ > 0 || fisherField.SqlDbType == SqlDbType.UniqueIdentifier) {   // 自增及UUID类型主键，跳过
+                    pkField = fisherField;
                     continue;
                 }
-                MethodInfo method = schema.MethodInfos.Find(t => t.Name.Equals("get_" + dapperField.Name,StringComparison.CurrentCultureIgnoreCase));
+                MethodInfo method = schema.MethodInfos.Find(t => t.Name.Equals("get_" + fisherField.Name,StringComparison.CurrentCultureIgnoreCase));
                 var getMethodValue = method.Invoke(vo,null);
                 if(getMethodValue == null) {    // 忽略null值，对应生成类中必须允许为null对象，也就是指定“int？”属性
-                    if(dapperField.AllowDBNull == false) {
+                    if(fisherField.AllowDBNull == false) {
                         result.ExecResult = Result.Exception;
-                        result.ExecException = new FieldNotAllowNull(string.Format("必填字段{0}数据库不允许为null!",dapperField.Name));
+                        result.ExecException = new FieldNotAllowNull(string.Format("必填字段{0}数据库不允许为null!",fisherField.Name));
                         break;
                     }
                     continue;
@@ -37,8 +37,8 @@ namespace Fisherman.Core {
                     sqlString += ",";
                     valueString += ",";
                 }
-                sqlString += "[" + dapperField.Name + "]";
-                switch(dapperField.SqlDbType) {
+                sqlString += "[" + fisherField.Name + "]";
+                switch(fisherField.SqlDbType) {
                     case SqlDbType.Bit:
                         valueString += FisherUtil.ParseBoolToBit(getMethodValue);
                         break;
@@ -107,20 +107,20 @@ namespace Fisherman.Core {
         public static T SingleRow<T>(this IDbConnection connection,int pk_Int = -1,string pk_uuid = null,string sqlCondition = null) where T : new() {
             T propertyItem = new T();
             FisherSchema schema = FisherUtil.ParseSchema(propertyItem.GetType());
-            FisherField dapperField = schema.Fields.Find(t => t.IsPrimaryKey == true);
-            string pkFieldName = dapperField.Name;  // 主键名称
-            if(dapperField == null) {                                     // 检查主键是否定义
+            FisherField fisherField = schema.Fields.Find(t => t.IsPrimaryKey == true);
+            string pkFieldName = fisherField.Name;  // 主键名称
+            if(fisherField == null) {                                     // 检查主键是否定义
                 throw new PKIsNull(schema.SchemaName);
             }
             string sqlString = "";
             if(pk_Int > 0) {
-                if(dapperField.SqlDbType.Equals(SqlDbType.Int) == false) {
-                    throw new IllegalType(string.Format("{0}应为Int类型",dapperField.Name));
+                if(fisherField.SqlDbType.Equals(SqlDbType.Int) == false) {
+                    throw new IllegalType(string.Format("{0}应为Int类型",fisherField.Name));
                 }
                 sqlString = string.Format(" where {0}={1}",pkFieldName,pk_Int);
             } else if(string.IsNullOrEmpty(pk_uuid) == false) {
-                if(dapperField.SqlDbType.Equals(SqlDbType.VarChar) == false && dapperField.SqlDbType.Equals(SqlDbType.NVarChar) == false) {
-                    throw new IllegalType(string.Format("{0}应为VarChar类型",dapperField.Name));
+                if(fisherField.SqlDbType.Equals(SqlDbType.VarChar) == false && fisherField.SqlDbType.Equals(SqlDbType.NVarChar) == false) {
+                    throw new IllegalType(string.Format("{0}应为VarChar类型",fisherField.Name));
                 }
                 sqlString = string.Format(" where {0}=\"{1}\"",pkFieldName,pk_uuid);
             } else if(string.IsNullOrEmpty(sqlCondition) == false) {
