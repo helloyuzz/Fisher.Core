@@ -116,11 +116,10 @@ namespace Fisher.Woman {
             if(schemaComment.Length > 0) {
                 smTable.Remarks = MyToolkit.IngoreNull(schemaComment[0]["value"]);
             }
-
             // 获取所有的字属性信息
             SqlDataAdapter dbAdapter = new SqlDataAdapter() {
-                //SelectCommand = new SqlCommand(String.Format("select * from [{0}]",sechma_Name),dbConn)
-                SelectCommand = new SqlCommand("sp_columns " + tableName,dbConn)
+                //SelectCommand = new SqlCommand("sp_columns " + tableName,dbConn)
+                SelectCommand = new SqlCommand("SELECT t1.colorder, t1.colid, t1.isnullable as 'Is_Nullable', t1.name as 'Column_Name', t1.scale, t2.name AS 'Type_Name', t1.length, COLUMNPROPERTY(t1.id,t1.name,'PRECISION') AS realy_length FROM syscolumns t1 LEFT JOIN systypes t2 ON t1.xtype = t2.xusertype INNER JOIN sysobjects t3 ON t1.id = t3.id AND t3.xtype = 'U' AND t3.name <> 'dtproperties' WHERE t3.name = '" + tableName + "' ORDER BY    t1.id",dbConn)
             };
             DataTable dt_Columns = new DataTable();
             int getCount = dbAdapter.Fill(dt_Columns);
@@ -155,7 +154,7 @@ namespace Fisher.Woman {
                     DataRow commentRow = commentRows[0];
                     smColumn.Remarks = commentRow[1].ToString();
                 }
-                smColumn.MaxLength = MyToolkit.ParseInt(getRow["Length"]);
+                smColumn.MaxLength = MyToolkit.ParseInt(getRow["realy_length"]);   // Real_Length
 
                 if(typeName.IndexOf("identity") != -1 || smColumn.Name.Equals(pkname,StringComparison.CurrentCultureIgnoreCase)) {
                     smColumn.PrimaryKey = true;

@@ -14,15 +14,15 @@ namespace Fisherman.Core {
         public string GetIncludeSQLFields {
             get {
                 string _temp = "";
-                List<FisherField> dapperFields = Fields.FindAll(t => t.QueryOption.Equals(QueryOption.Include));
-                if(dapperFields == null || dapperFields.Count <= 0) {
-                    dapperFields = Fields.FindAll(t => t.QueryOption.Equals(QueryOption.Exclude) == false);
+                List<FisherField> _fisherFields = Fields.FindAll(t => t.QueryOption.Equals(QueryOption.Include));
+                if(_fisherFields == null || _fisherFields.Count <= 0) {
+                    _fisherFields = Fields.FindAll(t => t.QueryOption.Equals(QueryOption.Exclude) == false);
                 }
-                foreach(FisherField dapperField in dapperFields) {
+                foreach(FisherField fisherField in _fisherFields) {
                     if(string.IsNullOrEmpty(_temp) == false) {
                         _temp += ",";
                     }
-                    _temp += "[" + dapperField.Name + "]";
+                    _temp += "[" + fisherField.Name + "]";
                 }
                 return _temp;
             }

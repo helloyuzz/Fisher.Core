@@ -12,15 +12,19 @@ namespace Fisherman.Core {
         public int TotalPage {
             get;
             internal set;
-        }
+        }        
     }
     public partial class FisherResult {
-        public Result ExecResult { get; internal set; }
-        public Exception ExecException { get; internal set; }
+        public Result Success { get; internal set; }
+        public Exception Exception { get; internal set; }
         public string CommondText { get; internal set; }
-        public int RecentId { get; internal set; }
+        public int Pk_Id { get; internal set; }
+        public string Pk_UUID {
+            get;internal set;
+        }
+      
     }
     public enum Result {
-        OK, Falied, Exception
+        True = 0, False = 1, Exception = 2
     }
 }

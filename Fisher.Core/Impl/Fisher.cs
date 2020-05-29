@@ -10,37 +10,122 @@ using Fisherman.Core;
 namespace Fisherman.Core {
     public static partial class Fisher {
         static string _ConnectionString;
-        public static string CommandText {
-            get;set;
-        }
 
-        public static void SetConnectionString(string sqlConnectionString) {
+        public static void Set_ConnectionString(string sqlConnectionString) {
             _ConnectionString = sqlConnectionString;
         }
-        public static FisherResult<T> Query<T>(string sqlWhere = null,string sqlOrderBy = null,int pageSize = 30,int pageIndex = 1,params string[] selectFields) where T : new() {
+        private static void CheckConnection() {
             if(string.IsNullOrEmpty(_ConnectionString)) {
-                throw new ConnectionStringIsNull("连接字符串不能为空");
+                throw new ConnectionStringIsNull(FisherMessage.ConnectionStringIsNull.Message);
             }
-            FisherResult<T> result = null;
-            using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
-                result = conn.Select<T>(sqlWhere,sqlOrderBy,pageSize,pageIndex,selectFields);
-                CommandText = result.CommondText;
-                result.CommondText = "";
+        }
+        public static T SignleRow<T>(int id,params string[] selectFields) where T : new() {
+            T item = new T();
+            FisherSchema schema = FisherUtil.ParseSchema(item.GetType());
+            FisherField pkField = schema.Fields.Find(t => t.KEY_SEQ > 0 || t.SqlDbType == SqlDbType.UniqueIdentifier);
+            if(pkField == null) {
+                throw new PKIsNull(FisherMessage.PkIsNull.Message);
+            }
 
-                // page count
-                if(pageSize > 0 && pageIndex > 0) {
-                    result.TotalPage = result.TotalRecord / result.PageSize;
-                    if(result.TotalRecord % result.PageSize > 0) {
-                        result.TotalPage++;
+            string sqlWhere = string.Format(" where {0}={1}",pkField.Name,id);
+
+            FisherResult<T> result = Query<T>(sqlWhere,"",selectFields);
+            if(result.Result != null && result.Result.Count > 0) {
+                item = result.Result[0];
+            }
+            
+            return item;
+        }
+        /// <summary>
+        /// 第一个参数默认为：UUID，也就是VarChar型主键；
+        /// <para>当需要采用：" where xxx=xxx"进行查询时，需将defaultIsWhereGrammar参数设为true，也就是：</para>        
+        /// <para>1.既可以用主键查询；</para>
+        /// <para>2.也可以用where条件查询；</para>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uuid"></param>
+        /// <param name="defaultIsWhereGrammar"></param>
+        /// <returns></returns>
+        public static T SignleRow<T>(string uuid,bool defaultIsWhereGrammar=false) where T : new() {
+            T item = new T();
+            return item;
+        }
+        public static FisherResult<T> Query<T>(params string[] selectFields)where T:new() {
+            return Query<T>(null,null,-1,-1,selectFields);
+        }
+        public static FisherResult<T> Query<T>(string sqlWhere,string sqlOrderBy,params string[] selectFields) where T : new() {
+            return Query<T>(sqlWhere,sqlOrderBy,-1,-1,selectFields);
+        }
+        public static FisherResult<T> Query<T>(string sqlWhere=null,string sqlOrderBy=null,int pageSize=-1,int pageIndex=-1,params string[] selectFields) where T : new() {
+            CheckConnection();
+
+            FisherResult<T> result = null;
+            try {
+                using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
+                    result = conn.Select<T>(sqlWhere,sqlOrderBy,pageSize,pageIndex,selectFields);
+
+                    if(result.Result != null) {
+                        result.Success = Result.True;
+                    } else {
+                        result.Success = Result.False;
+                    }
+
+                    // page count
+                    if(pageSize > 0 && pageIndex > 0) {
+                        result.TotalPage = result.TotalRecord / result.PageSize;
+                        if(result.TotalRecord % result.PageSize > 0) {
+                            result.TotalPage++;
+                        }
                     }
                 }
+            } catch(Exception exc) {
+                result = new FisherResult<T>();
+                result.Success = Result.Exception;
+                result.Exception = exc;
             }
             return result;
         }
 
-        public static FisherResult Save<T>(){
-            FisherResult result = new FisherResult();
 
+        public static FisherResult Insert<T>(T item){
+            CheckConnection();
+
+            FisherResult result = new FisherResult();
+            try {
+                using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
+                    result = conn.Insert<T>(item);
+
+                    //if(result.Pk_Id > 0 || string.IsNullOrEmpty(result.Pk_UUID)) {
+                    //    result.Success = Result.True;
+                    //} else {
+                    //    result.Success = Result.False;
+                    //}
+                }
+            } catch(Exception exc) {
+                result.Success = Result.Exception;
+                result.Exception = exc;
+            }
+
+            return result;
+        }
+        public static FisherResult Update<T>(T item) {
+            CheckConnection();
+
+            FisherResult result = new FisherResult();
+            try {
+                using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
+                    result = conn.Update<T>(item);
+
+                    if(result.Pk_Id > 0 || string.IsNullOrEmpty(result.Pk_UUID)) {
+                        result.Success = Result.True;
+                    } else {
+                        result.Success = Result.False;
+                    }
+                }
+            } catch(Exception exc) {
+                result.Success = Result.Exception;
+                result.Exception = exc;
+            }
 
             return result;
         }

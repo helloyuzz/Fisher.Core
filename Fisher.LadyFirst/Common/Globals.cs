@@ -16,6 +16,6 @@ namespace Fisherman.LadyFirst
         public static string ValidIssuer = "ljk";
 
         public static IDbConnection SqlConnection { get; internal set; }
-        public static string SqlConnectionString = "Server=192.168.3.31;Database=PACKPRESSDB;User Id=sa;Password=cssd20151231@;";
+        public static string SqlConnectionString = "Server=localhost;Database=PACKPRESSDB;User Id=sa;Password=cssd20151231@;";
     }
 }

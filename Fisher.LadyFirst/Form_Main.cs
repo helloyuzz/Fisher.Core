@@ -77,5 +77,40 @@ namespace Fisherman.LadyFirst {
 
             //}
         }
+
+        private void btn_Save_Click(object sender,EventArgs e) {
+            int id = FisherUtil.ParseInt(tbx_ConfigurationID.Text);
+
+            TSysConfiguration configuration = new TSysConfiguration();
+
+            if(id > 0) { // 修改
+                configuration.ConfigurationID = id;
+            }
+            configuration.ConfigurationKey = tbx_ConfigurationKey.Text;
+            configuration.Value = tbx_Value.Text;
+            configuration.Remark = tbx_Remark.Text;
+            configuration.IsDisabled = cbx_IsDisabled.Checked;
+
+            FisherResult result = null;
+
+            if(id > 0) {
+                result = Fisher.Update<TSysConfiguration>(configuration);
+            } else {
+                result = Fisher.Insert<TSysConfiguration>(configuration);
+            }
+            if(result.Success == Result.True) {
+                Console.WriteLine(result.Pk_Id);
+            }
+
+
+        }
+
+        private void btn_SignleRow_Click(object sender,EventArgs e) {
+            int id = FisherUtil.ParseInt(tbx_Get_ConfigurationID.Text);
+            if(id > 0) {
+                TSysConfiguration configuration = Fisher.SignleRow<TSysConfiguration>(id);
+                Fisher.SignleRow<TSysConfiguration>("",true);
+            }
+        }
     }
 }

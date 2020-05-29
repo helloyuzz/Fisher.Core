@@ -17,7 +17,7 @@ namespace Fisherman.LadyFirst {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Fisher.SetConnectionString(Globals.SqlConnectionString);
+            Fisher.Set_ConnectionString(Globals.SqlConnectionString);
 
             Application.Run(new Form_Main());
         }

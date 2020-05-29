@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Fisherman.Core {
     public class PKIsNull:Exception {
         public PKIsNull(string message) : base(message) {
-            message += "未定义主键。";
         }
     }
 }

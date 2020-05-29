@@ -14,33 +14,56 @@ namespace Fisherman.Core {
             FisherSchema schema = FisherUtil.ParseSchema(vo.GetType());
             FisherField pkField = null;
 
-            string sqlString = string.Format("insert into [{0}](",schema.SchemaName);
-            string valueString = " values(";
-            bool isFirstRow = true;
+            /* **************************************************************************
+             * 构造Insert into [xxx] values(xxx,xxx,xxx,...);
+             * 也就是构造最原始的sql代码
+             * 重点：
+             *    - 采用临时表的方式实现，并且通过该临时表获得新插入的“主键值”
+             * 逻辑：
+             *    - 首先判断是否是主键，跳过主键不更新
+             *    - 然后构造values(...)内容
+             */
+
+            string tmpDeclare = "";
+            string sqlFieldList = "";
+            string sqlValueList = "";
+
+            bool isFirstItem = true;
             foreach(FisherField fisherField in schema.Fields) {
-                if(fisherField.KEY_SEQ > 0 || fisherField.SqlDbType == SqlDbType.UniqueIdentifier) {   // 自增及UUID类型主键，跳过
+                /* ****************************************
+                 * 自增int类型，及UUID类型主键，跳过
+                 * 注意：
+                 *    - int类型需设置标识自动增长
+                 *    - varchar类型，需将字段设置为uniqueidentifier类型，且默认值为：(newid())
+                 *    - 这样就由数据库“自动产生”主键唯一标识
+                */
+                if(fisherField.KEY_SEQ > 0 || fisherField.SqlDbType == SqlDbType.UniqueIdentifier) {
                     pkField = fisherField;
                     continue;
                 }
+                
                 MethodInfo method = schema.MethodInfos.Find(t => t.Name.Equals("get_" + fisherField.Name,StringComparison.CurrentCultureIgnoreCase));
+
+                /* *****************************************************
+                 * 检查是否是必填字段，如果数据为必填，则不允许为空
+                 * 然后根据不同的数据类型，构造values字符串，如果字段类型为varchar，则需要增加'<xxx>'表示
+                 */
+
                 var getMethodValue = method.Invoke(vo,null);
-                if(getMethodValue == null) {    // 忽略null值，对应生成类中必须允许为null对象，也就是指定“int？”属性
-                    if(fisherField.AllowDBNull == false) {
-                        result.ExecResult = Result.Exception;
-                        result.ExecException = new FieldNotAllowNull(string.Format("必填字段{0}数据库不允许为null!",fisherField.Name));
-                        break;
-                    }
-                    continue;
+                if(getMethodValue == null && fisherField.AllowDBNull == false) {
+                    throw new FieldNotAllowNull(FisherMessage.FieldNotAllowNull.AddParams(fisherField.Name));
                 }
 
-                if(isFirstRow == false) {
-                    sqlString += ",";
-                    valueString += ",";
+                if(isFirstItem == false) {
+                    tmpDeclare += ",";
+                    sqlFieldList += ",";
+                    sqlValueList += ",";
                 }
-                sqlString += "[" + fisherField.Name + "]";
+                tmpDeclare += string.Format("[{0}] {1}",fisherField.Name,Enum.GetName(typeof(SqlDbType),fisherField.SqlDbType));
+                sqlFieldList += "[" + fisherField.Name + "]";
                 switch(fisherField.SqlDbType) {
                     case SqlDbType.Bit:
-                        valueString += FisherUtil.ParseBoolToBit(getMethodValue);
+                        sqlValueList += FisherUtil.ParseBoolToBit(getMethodValue);
                         break;
                     case SqlDbType.Int:
                     case SqlDbType.BigInt:
@@ -48,44 +71,52 @@ namespace Fisherman.Core {
                     case SqlDbType.Real:
                     case SqlDbType.SmallInt:
                     case SqlDbType.TinyInt:
-                        valueString += getMethodValue;
+                        sqlValueList += getMethodValue;
                         break;
                     default:
-                        valueString += string.Format("'{0}'",getMethodValue);
+                        sqlValueList += string.Format("'{0}'",getMethodValue);
                         break;
                 }
-                isFirstRow = false;
+                isFirstItem = false;
             }
-            sqlString += string.Format("){0})",valueString);    // like:insert into [schema]([filedlist...]) values([values...]);
-            result.CommondText = sqlString;
-            if(result.ExecException == null) {
+
+            /* ***********************************************************************
+             * 构造真实的insert语句，格式：
+             *    - insert into [schema]([filedlist...]) values([values...]);
+             * */
+            string realDeclare = string.Format("DECLARE @tmp_tbl TABLE({0});",tmpDeclare);
+            string realSQL = string.Format("insert into [{0}] values({1});",sqlFieldList,sqlValueList);
+            string realIdentity = "SELECT * FROM @tmp_tbl;";
+
+            result.CommondText = realSQL;
+            if(result.Exception == null) {
                 try {
                     if(conn.State == ConnectionState.Closed) {
                         conn.Open();
                     }
 
-                    IDbCommand command = conn.CreateCommand();
-                    command.CommandText = sqlString;
-                    int resultCount = command.ExecuteNonQuery();
-                    if(resultCount > 0) {
+                    IDbCommand command = conn.CreateCommand();                    
+                    command.CommandText = realDeclare + realSQL + realIdentity; //"DECLARE @tmp_tbl TABLE([uuid] uniqueidentifier, [code] nvarchar(50));INSERT INTO[dbo].[aaa1] ([code]) OUTPUT INSERTED.[uuid], INSERTED.[code] INTO @tmp_tbl VALUES(N'a1');SELECT* FROM @tmp_tbl";
+                    var resultCount = command.ExecuteScalar();
+                    if(FisherUtil.ParseInt(resultCount) > 0) {
                         //command.CommandText = string.Format("SELECT IDENT_CURRENT('{0}')",schema.SchemaName);
                         switch(pkField.SqlDbType) {
                             case SqlDbType.Int:
                                 command.CommandText = "select scope_identity() ";
-                                result.RecentId = FisherUtil.ParseInt(command.ExecuteScalar());
+                                result.Pk_Id = FisherUtil.ParseInt(command.ExecuteScalar());
                                 break;
                             case SqlDbType.UniqueIdentifier:
                                 command.CommandText = "";
                                 //todo:UUID暂不实现
                                 break;
                         }
-                        result.ExecResult = Result.OK;
+                        result.Success = Result.True;
                     } else {
-                        result.ExecResult = Result.Falied;
+                        result.Success = Result.False;
                     }
                 } catch(Exception excCommand) {
-                    result.ExecResult = Result.Exception;
-                    result.ExecException = excCommand;
+                    result.Success = Result.Exception;
+                    result.Exception = excCommand;
                 }
             }
             return result;
@@ -104,30 +135,30 @@ namespace Fisherman.Core {
 
             return result;
         }
-        public static T SingleRow<T>(this IDbConnection connection,int pk_Int = -1,string pk_uuid = null,string sqlCondition = null) where T : new() {
+        public static T SingleRow<T>(this IDbConnection conn,int pk_Int = -1,string pk_uuid = null,string sqlCondition = null) where T : new() {
             T propertyItem = new T();
             FisherSchema schema = FisherUtil.ParseSchema(propertyItem.GetType());
             FisherField fisherField = schema.Fields.Find(t => t.IsPrimaryKey == true);
             string pkFieldName = fisherField.Name;  // 主键名称
             if(fisherField == null) {                                     // 检查主键是否定义
-                throw new PKIsNull(schema.SchemaName);
+                throw new PKIsNull(FisherMessage.PkIsNull.AddParams(schema.SchemaName));
             }
             string sqlString = "";
             if(pk_Int > 0) {
                 if(fisherField.SqlDbType.Equals(SqlDbType.Int) == false) {
-                    throw new IllegalType(string.Format("{0}应为Int类型",fisherField.Name));
+                    throw new IllegalType(FisherMessage.IllegalType.AddParams("Int",fisherField.Name));
                 }
                 sqlString = string.Format(" where {0}={1}",pkFieldName,pk_Int);
             } else if(string.IsNullOrEmpty(pk_uuid) == false) {
                 if(fisherField.SqlDbType.Equals(SqlDbType.VarChar) == false && fisherField.SqlDbType.Equals(SqlDbType.NVarChar) == false) {
-                    throw new IllegalType(string.Format("{0}应为VarChar类型",fisherField.Name));
+                    throw new IllegalType(FisherMessage.IllegalType.AddParams("VarChar",fisherField.Name));
                 }
                 sqlString = string.Format(" where {0}=\"{1}\"",pkFieldName,pk_uuid);
             } else if(string.IsNullOrEmpty(sqlCondition) == false) {
                 sqlString = sqlCondition;
             }
 
-            FisherResult<T> result = Select<T>(connection,sqlString);
+            FisherResult<T> result = Select<T>(conn,sqlString);
             if(result.Result.Count > 0) {
                 return result.Result[0];
             } else {
@@ -135,52 +166,11 @@ namespace Fisherman.Core {
             }
         }
 
-
-        /// <summary>
-        /// execute db Select action，return as Ljk.Dapper.LjkList
-        /// </summary>
-        /// <example>
-        /// <code>
-        /// class Program {
-        ///     static void Main(string[] args) {
-        ///         LjkList&lt;TSysConfiguration&gt; list = null;
-        ///         using(IDbConnection dbConnection = new SqlConnection(Globals.SqlConnectionString)) {
-        ///             list = dbConnection.Select&lt;TSysConfiguration&gt;();
-        ///         }
-        ///     Console.ReadLine();
-        ///  }
-        /// }
-        /// </code>
-        /// </example>
-        /// <param name="sqlCondition" >
-        /// <para>sqlCondition：</para>
-        /// <para>Example：" where name="xxx" and code="xxx""</para>
-        /// <seealso cref="www.163.com"/>
-        /// </param>
-        /// <param name="orderby">
-        /// <para>sqlOrderby:</para>
-        /// <para>Example：" order by id asc[desc]"</para>
-        /// </param>
-        /// <returns>Ljk.Dapper.LjkList</returns>
+       
         public static FisherResult<T> Select<T>(this IDbConnection connection,string sqlCondition = null,string orderby = null) where T : new() {
             return Select<T>(connection,sqlCondition,orderby,null);
         }
-        /// <summary>
-        ///  execute db Select action，return as Ljk.Dapper.LjkList
-        /// </summary>
-        /// <param name="sqlCondition" >
-        /// <para>sqlCondition：</para>
-        /// <para>Example：" where name="xxx" and code="xxx""</para>
-        /// </param>
-        /// <param name="orderby">
-        /// <para>sqlOrderby:</para>
-        /// <para>Example：" order by id asc[desc]"</para>
-        /// </param>
-        /// <param name="selectFields">
-        /// <para>select fields：</para>
-        /// <para>Example："id","Name",...</para>
-        /// </param>
-        /// <returns>Ljk.Dapper.LjkList</returns>
+    
         public static FisherResult<T> Select<T>(this IDbConnection connection,string sqlCondition = null,string orderby = null,params string[] selectFields) where T : new() {
             return Select<T>(connection,sqlCondition,orderby,-1,-1,selectFields);
         }
@@ -204,8 +194,8 @@ namespace Fisherman.Core {
             FisherSchema schema = FisherUtil.ParseSchema(propertyItem.GetType());
             string pkFieldName = schema.Fields.Find(t => t.IsPrimaryKey == true).Name;  // 主键名称          
             if(string.IsNullOrEmpty(pkFieldName)) {                                     // 检查主键是否定义
-                result.ExecResult = Result.Exception;
-                result.ExecException = new PKIsNull(schema.SchemaName);
+                result.Success = Result.Exception;
+                result.Exception = new PKIsNull(schema.SchemaName);
             } else {
                 /* **********************************************
                  * 检查用户是否指定查询字段
@@ -217,8 +207,8 @@ namespace Fisherman.Core {
                     foreach(string field in selectFields) { // 依次检查用户指定的字段是否在表中存在。
                         FisherField fisherField = schema.Fields.Find(t => t.Name.Equals(field));
                         if(fisherField == null) { // 用户指定了非法的字段，也就是指定了不是表中的字段。
-                            result.ExecResult = Result.Exception;
-                            result.ExecException = new IllegalField(string.Format("Illegal Field:\"{0}\"",field));
+                            result.Success = Result.Exception;
+                            result.Exception = new IllegalField(FisherMessage.IllegalField.AddParams(field,schema.SchemaName));
                             break;
                         }
                         fisherField.QueryOption = QueryOption.Include; // 标记为Include
@@ -280,8 +270,8 @@ namespace Fisherman.Core {
                     dataReader.Close();
                     dataReader = null;
                 } catch(Exception excDBCommand) {
-                    result.ExecResult = Result.Exception;
-                    result.ExecException = excDBCommand;
+                    result.Success = Result.Exception;
+                    result.Exception = excDBCommand;
                 }
             }
             return result;

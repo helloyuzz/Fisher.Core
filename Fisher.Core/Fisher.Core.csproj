@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\FisherMessage.cs" />
+    <Compile Include="Core\TipMessage.cs" />
     <Compile Include="Var\ConnectionStringIsNull.cs" />
     <Compile Include="Var\FieldNotAllowNull.cs" />
     <Compile Include="Var\IllegalField.cs" />

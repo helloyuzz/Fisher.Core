@@ -9,7 +9,7 @@ namespace Fisherman.Core {
     public class FisherUtil {
         internal static string ParseSelectSQLFields<T>(T item) where T : new() {
             string selectSQLFields = "";
-            var ljkDapperFlag = item.GetType().GetCustomAttributes<FisherField>();
+            var fisherFlag = item.GetType().GetCustomAttributes<FisherField>();
 
             PropertyInfo[] propertyInfos = item.GetType().GetProperties();
             foreach(PropertyInfo propertyInfo in propertyInfos) {
@@ -20,6 +20,10 @@ namespace Fisherman.Core {
             }
 
             return selectSQLFields;
+        }
+
+        internal static string ParsePkField(Type type) {
+            throw new NotImplementedException();
         }
 
         /// <summary>
