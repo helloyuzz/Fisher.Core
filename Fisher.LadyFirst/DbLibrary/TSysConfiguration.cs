@@ -16,12 +16,12 @@ namespace App.DbLibrary {
           get;
           set;
       }
-      [FisherField(Name="Value",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false)]
+      [FisherField(Name="Value",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=-1)]
       public virtual string Value {
           get;
           set;
       }
-      [FisherField(Name="Remark",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false)]
+      [FisherField(Name="Remark",SqlDbType=SqlDbType.NVarChar,AllowDBNull =false,MaxLength=-1)]
       public virtual string Remark {
           get;
           set;

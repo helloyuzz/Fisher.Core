@@ -632,26 +632,26 @@ namespace Fisher.Woman {
         }
 
         private string ParseDapperFieldAttribute(SmField smColumn) {
-            string getDapperFlag = string.Format("Name=\"{0}\",SqlDbType=SqlDbType.{1}",smColumn.Name,Enum.GetName(typeof(SqlDbType),smColumn.DbType));
+            string getFisherFlag = string.Format("Name=\"{0}\",SqlDbType=SqlDbType.{1}",smColumn.Name,Enum.GetName(typeof(SqlDbType),smColumn.DbType));
 
             if(smColumn.PrimaryKey) {
-                getDapperFlag += ",IsPrimaryKey = true";
+                getFisherFlag += ",IsPrimaryKey = true";
             }
             if(smColumn.KEY_SEQ > 0) {
-                getDapperFlag += ",KEY_SEQ=" + smColumn.KEY_SEQ;
+                getFisherFlag += ",KEY_SEQ=" + smColumn.KEY_SEQ;
             }
             if(smColumn.Is_Nullable == false) {
-                getDapperFlag += ",AllowDBNull =false";
+                getFisherFlag += ",AllowDBNull =false";
             }
-            if(smColumn.MaxLength > 0) {
-                getDapperFlag += ",MaxLength=" + smColumn.MaxLength;
-            }
+            //if(smColumn.MaxLength > 0) {
+            getFisherFlag += ",MaxLength=" + smColumn.MaxLength;
+            //}
             if(string.IsNullOrEmpty(smColumn.Remarks) == false) {
-                getDapperFlag += ",Remarks=\"" + smColumn.Remarks+"\"";
+                getFisherFlag += ",Remarks=\"" + smColumn.Remarks + "\"";
             }
 
 
-            return string.Format("[FisherField({0})]",getDapperFlag);
+            return string.Format("[FisherField({0})]",getFisherFlag);
         }
 
         private string createDAO(string sechemaName) {
