@@ -11,6 +11,7 @@ using System.Configuration;
 using com.yuzz.dblibrary;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using Fisherman.Core;
 
 namespace Fisher.Woman {
     public partial class Form_MSSQL:Form {
@@ -30,8 +31,8 @@ namespace Fisher.Woman {
             // 表
             SqlDataReader dbReader = dbCmd.ExecuteReader();
             while(dbReader.Read()) {
-                string tableId = MyToolkit.IngoreNull(dbReader["Id"]);
-                string tableName = MyToolkit.IngoreNull(dbReader["Name"]);
+                string tableId = FisherUtil.IngoreNull(dbReader["Id"]);
+                string tableName = FisherUtil.IngoreNull(dbReader["Name"]);
                 SmTable smTable = new SmTable(tableId,tableName);
                 smTableList.Add(smTable);                
             }
@@ -48,8 +49,8 @@ namespace Fisher.Woman {
             dbCmd.CommandText = "select [Id],[Name] from [SysObjects] where type='p' order by [name] asc";  //  and name like 'sp_%'
             dbReader = dbCmd.ExecuteReader();
             while(dbReader.Read()) {
-                string p_Id = MyToolkit.IngoreNull(dbReader["Id"]);
-                string p_Name = MyToolkit.IngoreNull(dbReader["Name"]);
+                string p_Id = FisherUtil.IngoreNull(dbReader["Id"]);
+                string p_Name = FisherUtil.IngoreNull(dbReader["Name"]);
                 SmProcedure smProcedure = new SmProcedure(p_Name);      
 
                 smProcedures.Add(smProcedure);
@@ -114,7 +115,7 @@ namespace Fisher.Woman {
             comment.Fill(dt_Comment);
             DataRow[] schemaComment = dt_Comment.Select("name='_SchemaName'");
             if(schemaComment.Length > 0) {
-                smTable.Remarks = MyToolkit.IngoreNull(schemaComment[0]["value"]);
+                smTable.Remarks = FisherUtil.IngoreNull(schemaComment[0]["value"]);
             }
             // 获取所有的字属性信息
             SqlDataAdapter dbAdapter = new SqlDataAdapter() {
@@ -133,8 +134,8 @@ namespace Fisher.Woman {
             string pkname = "";
             int key_SEQ = -1;
             if(dt_pk != null && dt_pk.Rows.Count > 0) {
-                pkname = MyToolkit.IngoreNull(dt_pk.Rows[0]["Column_name"]);
-                key_SEQ = MyToolkit.ParseInt(dt_pk.Rows[0]["KEY_SEQ"]);
+                pkname = FisherUtil.IngoreNull(dt_pk.Rows[0]["Column_name"]);
+                key_SEQ = FisherUtil.ParseInt(dt_pk.Rows[0]["KEY_SEQ"]);
             }
 
             smTable.TableName = tableName;
@@ -143,25 +144,25 @@ namespace Fisher.Woman {
                     smTable.Fields = new List<SmField>();
                 }
 
-                string typeName = MyToolkit.IngoreNull(getRow["Type_Name"]);
+                string typeName = FisherUtil.IngoreNull(getRow["Type_Name"]);
 
                 SmField smColumn = new SmField();
-                smColumn.Name = MyToolkit.IngoreNull(getRow["Column_Name"]);
-                smColumn.DbType = MyToolkit.ParseToSqlDbType(typeName);
+                smColumn.Name = FisherUtil.IngoreNull(getRow["Column_Name"]);
+                smColumn.DbType = FisherUtil.ParseToSqlDbType(typeName);
 
                 DataRow[] commentRows = dt_Comment.Select("name='" + smColumn.Name + "'");
                 if(commentRows.Length > 0) {
                     DataRow commentRow = commentRows[0];
                     smColumn.Remarks = commentRow[1].ToString();
                 }
-                smColumn.MaxLength = MyToolkit.ParseInt(getRow["realy_length"]);   // Real_Length
+                smColumn.MaxLength = FisherUtil.ParseInt(getRow["realy_length"]);   // Real_Length
 
                 if(typeName.IndexOf("identity") != -1 || smColumn.Name.Equals(pkname,StringComparison.CurrentCultureIgnoreCase)) {
                     smColumn.PrimaryKey = true;
                 smColumn.KEY_SEQ = key_SEQ;
                 }
 
-                smColumn.Is_Nullable = MyToolkit.ParseBool(getRow["Is_Nullable"]);                 
+                smColumn.Is_Nullable = FisherUtil.ParseBool(getRow["Is_Nullable"]);                 
 
                 if(smColumn.PrimaryKey == true) {   // 主键放在最开始的位置
                     smTable.PrimaryKey = smColumn;
@@ -590,7 +591,7 @@ namespace Fisher.Woman {
 
                 string pkFieldType = string.Empty;
                 foreach(SmField smColumn in smTable.Fields) {
-                    pkFieldType = MyToolkit.ParseToDbTypeString(smColumn.DbType);
+                    pkFieldType = FisherUtil.ParseToDbTypeString(smColumn.DbType);
                     if(smColumn.PrimaryKey) {
                         temp.Append("                  _Fields.Add(new SQLField(\"" + smColumn.Name + "\"," + pkFieldType + ",true));\r\n");
                     } else if(string.IsNullOrEmpty(smColumn.Remarks) == false) {
@@ -609,7 +610,7 @@ namespace Fisher.Woman {
             foreach(SmField smColumn in smTable.Fields) {
                 temp.Append("      ");
                 temp.Append(ParseDapperFieldAttribute(smColumn)).Append("\r\n");
-                temp.Append("      public virtual ").Append(MyToolkit.ParseRunTimeDbTypeString(smColumn.DbType)).Append(" ").Append(smColumn.Name).Append(" {\r\n");
+                temp.Append("      public virtual ").Append(FisherUtil.ParseRunTimeDbTypeString(smColumn.DbType)).Append(" ").Append(smColumn.Name).Append(" {\r\n");
                 temp.Append("          get;\r\n");
                 temp.Append("          set;\r\n");
                 temp.Append("      }\r\n");
@@ -641,7 +642,7 @@ namespace Fisher.Woman {
                 getFisherFlag += ",KEY_SEQ=" + smColumn.KEY_SEQ;
             }
             if(smColumn.Is_Nullable == false) {
-                getFisherFlag += ",AllowDBNull =false";
+                getFisherFlag += ",CanotDBNull=true";
             }
             //if(smColumn.MaxLength > 0) {
             getFisherFlag += ",MaxLength=" + smColumn.MaxLength;
@@ -699,7 +700,7 @@ namespace Fisher.Woman {
                 } else if(smColumn.Name.Equals("ModifyTime")) {
                     getContentString = "DateTime.Now";
                 }
-                code.Append("              dbCmd.Parameters.Add(\"@Arg").Append(argIndex++).Append("\",").Append(MyToolkit.ParseToDbTypeString(smColumn.DbType)).Append(").Value = ").Append(getContentString).Append(";\r\n");
+                code.Append("              dbCmd.Parameters.Add(\"@Arg").Append(argIndex++).Append("\",").Append(FisherUtil.ParseToDbTypeString(smColumn.DbType)).Append(").Value = ").Append(getContentString).Append(";\r\n");
             }
 
             code.Append("         }else{\r\n");   // 修改操作
@@ -731,7 +732,7 @@ namespace Fisher.Woman {
                 } else if(smColumn.Name.Equals("ModifyTime")) {
                     getContentString = "DateTime.Now";
                 }
-                code.Append("              dbCmd.Parameters.Add(\"@Arg").Append(argIndex++).Append("\",").Append(MyToolkit.ParseToDbTypeString(smColumn.DbType)).Append(").Value = ").Append(getContentString).Append(";\r\n");
+                code.Append("              dbCmd.Parameters.Add(\"@Arg").Append(argIndex++).Append("\",").Append(FisherUtil.ParseToDbTypeString(smColumn.DbType)).Append(").Value = ").Append(getContentString).Append(";\r\n");
             }
             code.Append("              dbCmd.Parameters.Add(\"@Arg" + argIndex + "\",OleDbType.VarChar).Value = getValue.UUID;\r\n");
 

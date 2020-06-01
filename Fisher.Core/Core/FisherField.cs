@@ -9,7 +9,7 @@ namespace Fisherman.Core {
         public string Name { get; set; }
         public bool IsPrimaryKey { get; set; }
         public SqlDbType SqlDbType { get; set; }
-        public bool AllowDBNull { get; set; } = true;
+        public bool CanotDBNull { get; set; } = true;
         public int MaxLength { get; set; }
         public string Remarks { get; set; }
         /// <summary>

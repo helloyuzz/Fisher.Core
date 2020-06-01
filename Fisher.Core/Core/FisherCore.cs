@@ -24,9 +24,10 @@ namespace Fisherman.Core {
              *    - 然后构造values(...)内容
              */
 
-            string tmpDeclare = "";
+            string tmpDeclareField = "";
             string sqlFieldList = "";
             string sqlValueList = "";
+            string outputField = "";
 
             bool isFirstItem = true;
             foreach(FisherField fisherField in schema.Fields) {
@@ -39,6 +40,8 @@ namespace Fisherman.Core {
                 */
                 if(fisherField.KEY_SEQ > 0 || fisherField.SqlDbType == SqlDbType.UniqueIdentifier) {
                     pkField = fisherField;
+                    tmpDeclareField += string.Format("[{0}] {1}",fisherField.Name,Enum.GetName(typeof(SqlDbType),fisherField.SqlDbType));
+                    outputField = string.Format("OUTPUT INSERTED.[{0}] INTO @tmp_tbl",pkField.Name);
                     continue;
                 }
                 
@@ -48,44 +51,48 @@ namespace Fisherman.Core {
                  * 检查是否是必填字段，如果数据为必填，则不允许为空
                  * 然后根据不同的数据类型，构造values字符串，如果字段类型为varchar，则需要增加'<xxx>'表示
                  */
-
-                var getMethodValue = method.Invoke(vo,null);
-                if(getMethodValue == null && fisherField.AllowDBNull == false) {
-                    throw new FieldNotAllowNull(FisherMessage.FieldNotAllowNull.AddParams(fisherField.Name));
-                }
-
                 if(isFirstItem == false) {
-                    tmpDeclare += ",";
                     sqlFieldList += ",";
                     sqlValueList += ",";
                 }
-                tmpDeclare += string.Format("[{0}] {1}",fisherField.Name,Enum.GetName(typeof(SqlDbType),fisherField.SqlDbType));
-                sqlFieldList += "[" + fisherField.Name + "]";
-                switch(fisherField.SqlDbType) {
-                    case SqlDbType.Bit:
-                        sqlValueList += FisherUtil.ParseBoolToBit(getMethodValue);
-                        break;
-                    case SqlDbType.Int:
-                    case SqlDbType.BigInt:
-                    case SqlDbType.Float:
-                    case SqlDbType.Real:
-                    case SqlDbType.SmallInt:
-                    case SqlDbType.TinyInt:
-                        sqlValueList += getMethodValue;
-                        break;
-                    default:
-                        sqlValueList += string.Format("'{0}'",getMethodValue);
-                        break;
+                sqlFieldList += string.Format("[{0}]",fisherField.Name);
+
+                var getMethodValue = method.Invoke(vo,null);
+                if(getMethodValue == null) {
+                    if(fisherField.CanotDBNull == true) {
+                        throw new FieldNotAllowNull(FisherMessage.FieldNotAllowNull.AddParams(fisherField.Name));
+                    } else {
+                        sqlValueList += "null";
+                    }
+                } else {
+                    switch(fisherField.SqlDbType) {
+                        case SqlDbType.Bit:
+                            sqlValueList += FisherUtil.ParseBoolToBit(getMethodValue);
+                            break;
+                        case SqlDbType.Int:
+                        case SqlDbType.BigInt:
+                        case SqlDbType.Float:
+                        case SqlDbType.Real:
+                        case SqlDbType.SmallInt:
+                        case SqlDbType.TinyInt:
+                            sqlValueList += getMethodValue;
+                            break;
+                        default:
+                            sqlValueList += string.Format("'{0}'",getMethodValue);
+                            break;
+                    }
                 }
                 isFirstItem = false;
             }
 
             /* ***********************************************************************
              * 构造真实的insert语句，格式：
-             *    - insert into [schema]([filedlist...]) values([values...]);
+             *    - insert into [schema]([filedlist...]) 
+             *                          OUTPUT INSERTED.[uuid] INTO @tmp_tbl 
+             *                   values([values...]);
              * */
-            string realDeclare = string.Format("DECLARE @tmp_tbl TABLE({0});",tmpDeclare);
-            string realSQL = string.Format("insert into [{0}] values({1});",sqlFieldList,sqlValueList);
+            string realDeclare = string.Format("DECLARE @tmp_tbl TABLE({0});",tmpDeclareField);
+            string realSQL = string.Format("insert into [{0}]({1}) {2} values({3});",schema.SchemaName,sqlFieldList,outputField,sqlValueList);
             string realIdentity = "SELECT * FROM @tmp_tbl;";
 
             result.CommondText = realSQL;
@@ -95,25 +102,17 @@ namespace Fisherman.Core {
                         conn.Open();
                     }
 
-                    IDbCommand command = conn.CreateCommand();                    
+                    IDbCommand command = conn.CreateCommand();
                     command.CommandText = realDeclare + realSQL + realIdentity; //"DECLARE @tmp_tbl TABLE([uuid] uniqueidentifier, [code] nvarchar(50));INSERT INTO[dbo].[aaa1] ([code]) OUTPUT INSERTED.[uuid], INSERTED.[code] INTO @tmp_tbl VALUES(N'a1');SELECT* FROM @tmp_tbl";
-                    var resultCount = command.ExecuteScalar();
-                    if(FisherUtil.ParseInt(resultCount) > 0) {
-                        //command.CommandText = string.Format("SELECT IDENT_CURRENT('{0}')",schema.SchemaName);
-                        switch(pkField.SqlDbType) {
-                            case SqlDbType.Int:
-                                command.CommandText = "select scope_identity() ";
-                                result.Pk_Id = FisherUtil.ParseInt(command.ExecuteScalar());
-                                break;
-                            case SqlDbType.UniqueIdentifier:
-                                command.CommandText = "";
-                                //todo:UUID暂不实现
-                                break;
-                        }
-                        result.Success = Result.True;
+                    var resultDeclare = command.ExecuteScalar();
+
+                    if(pkField.SqlDbType == SqlDbType.Int) {
+                        result.Pk_Id = FisherUtil.ParseInt(resultDeclare);
                     } else {
-                        result.Success = Result.False;
+                        result.Pk_UUID = FisherUtil.IngoreNull(resultDeclare);
                     }
+
+                    result.Success = Result.True;
                 } catch(Exception excCommand) {
                     result.Success = Result.Exception;
                     result.Exception = excCommand;

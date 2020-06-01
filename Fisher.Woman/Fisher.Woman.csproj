@@ -172,7 +172,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MyToolkit.cs" />
     <Compile Include="vo\DBItem.cs" />
     <Compile Include="vo\MySQLJoin.cs" />
     <Compile Include="vo\MySQLReleationShip.cs" />
@@ -247,6 +246,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="xml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fisher.Core\Fisher.Core.csproj">
+      <Project>{6A2EDCE6-7EF0-4334-B86C-B06FD74A1DAE}</Project>
+      <Name>Fisher.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

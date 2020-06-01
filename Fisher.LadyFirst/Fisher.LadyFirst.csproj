@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Common\Globals.cs" />
     <Compile Include="DbLibrary\TFlowClean.cs" />
+    <Compile Include="DbLibrary\TSysConfiguration.cs" />
     <Compile Include="Fisher\vo\TSysConfiguration.cs" />
     <Compile Include="Fisher\vo\User.cs" />
     <Compile Include="Form_Main.cs">
