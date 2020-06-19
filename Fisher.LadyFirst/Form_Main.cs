@@ -43,6 +43,8 @@ namespace Fisherman.LadyFirst {
                 pageIndex = totalPage;
             }
 
+            //Fisher.Query<TSysConfiguration>(sqlWhere: "",pageSize: 1);
+
             FisherResult<TSysConfiguration> result = Fisher.Query<TSysConfiguration>(tbx_SqlCondition.Text,null,pageSize,pageIndex);
 
             dgv.DataSource = result.Result;
@@ -92,17 +94,11 @@ namespace Fisherman.LadyFirst {
             configuration.IsDisabled = cbx_IsDisabled.Checked;
 
             FisherResult result = null;
-
-            if(id > 0) {
-                result = Fisher.Update<TSysConfiguration>(configuration);
-            } else {
-                result = Fisher.Insert<TSysConfiguration>(configuration);
-            }
+            
+            result = Fisher.Save<TSysConfiguration>(configuration);
             if(result.Success == Result.True) {
                 Console.WriteLine(result.Pk_Id);
             }
-
-
         }
 
         private void btn_SignleRow_Click(object sender,EventArgs e) {
