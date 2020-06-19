@@ -9,7 +9,17 @@ using System.Reflection;
 /// </summary>
 namespace Fisherman.Core {
     public static partial class FisherCore {
-        internal static FisherResult Insert<T>(this IDbConnection conn,T vo) {
+        /// <summary>
+        /// 执行Insert或者Update操作，FisherCore.Save<T>(T item){ ... }
+        /// <para>系统会根据item是否包括pk主键值来判断操作类型：</para>
+        /// <para>  - 包括pk，执行Update操作</para>
+        /// <para>  - 不包括pk，执行Insert操作，因为pk为数据库自动生成（支持int自增类型，及UUID自动生成类型主键）</para>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="vo"></param>
+        /// <returns></returns>
+        internal static FisherResult Save<T>(this IDbConnection conn,T vo) {
             FisherResult result = new FisherResult();
             FisherSchema schema = FisherUtil.ParseSchema(vo.GetType());
             FisherField pkField = null;
@@ -120,13 +130,7 @@ namespace Fisherman.Core {
             }
             return result;
         }
-        public static FisherResult Update<T>(this IDbConnection connection,T item) {
-            FisherResult result = new FisherResult();
-
-
-
-            return result;
-        }
+  
         public static FisherResult Delete<T>(this IDbConnection connection,int id) {
             FisherResult result = new FisherResult();
 
