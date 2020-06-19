@@ -19,7 +19,7 @@ namespace Fisherman.Core {
                 throw new ConnectionStringIsNull(FisherMessage.ConnectionStringIsNull.Message);
             }
         }
-        public static T SignleRow<T>(int id,params string[] selectFields) where T : new() {
+        public static T SignleRow<T>(int id,params string[] queryFields) where T : new() {
             T item = new T();
             FisherSchema schema = FisherUtil.ParseSchema(item.GetType());
             FisherField pkField = schema.Fields.Find(t => t.KEY_SEQ > 0 || t.SqlDbType == SqlDbType.UniqueIdentifier);
@@ -29,7 +29,7 @@ namespace Fisherman.Core {
 
             string sqlWhere = string.Format(" where {0}={1}",pkField.Name,id);
 
-            FisherResult<T> result = Query<T>(sqlWhere,"",selectFields);
+            FisherResult<T> result = Query<T>(sqlWhere:sqlWhere,sqlOrderBy:null,pageSize:-1,pageIndex:-1,queryFields:queryFields);
             if(result.Result != null && result.Result.Count > 0) {
                 item = result.Result[0];
             }
@@ -50,19 +50,19 @@ namespace Fisherman.Core {
             T item = new T();
             return item;
         }
-        public static FisherResult<T> Query<T>(params string[] selectFields)where T:new() {
-            return Query<T>(null,null,-1,-1,selectFields);
-        }
-        public static FisherResult<T> Query<T>(string sqlWhere,string sqlOrderBy,params string[] selectFields) where T : new() {
-            return Query<T>(sqlWhere,sqlOrderBy,-1,-1,selectFields);
-        }
-        public static FisherResult<T> Query<T>(string sqlWhere=null,string sqlOrderBy=null,int pageSize=-1,int pageIndex=-1,params string[] selectFields) where T : new() {
+        //public static FisherResult<T> Query<T>(params string[] selectFields)where T:new() {
+        //    return Query<T>(null,null,-1,-1,selectFields);
+        //}
+        //public static FisherResult<T> Query<T>(string sqlWhere,string sqlOrderBy,params string[] selectFields) where T : new() {
+        //    return Query<T>(sqlWhere,sqlOrderBy,-1,-1,selectFields);
+        //}
+        public static FisherResult<T> Query<T>(string sqlWhere=null,string sqlOrderBy=null,int pageSize=-1,int pageIndex=-1,params string[] queryFields) where T : new() {
             CheckConnection();
 
             FisherResult<T> result = null;
             try {
                 using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
-                    result = conn.Select<T>(sqlWhere,sqlOrderBy,pageSize,pageIndex,selectFields);
+                    result = conn.Select<T>(sqlWhere,sqlOrderBy,pageSize,pageIndex,queryFields);
 
                     if(result.Result != null) {
                         result.Success = Result.True;
@@ -87,40 +87,13 @@ namespace Fisherman.Core {
         }
 
 
-        public static FisherResult Insert<T>(T item){
+        public static FisherResult Save<T>(T item){
             CheckConnection();
 
             FisherResult result = new FisherResult();
             try {
                 using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
-                    result = conn.Insert<T>(item);
-
-                    //if(result.Pk_Id > 0 || string.IsNullOrEmpty(result.Pk_UUID)) {
-                    //    result.Success = Result.True;
-                    //} else {
-                    //    result.Success = Result.False;
-                    //}
-                }
-            } catch(Exception exc) {
-                result.Success = Result.Exception;
-                result.Exception = exc;
-            }
-
-            return result;
-        }
-        public static FisherResult Update<T>(T item) {
-            CheckConnection();
-
-            FisherResult result = new FisherResult();
-            try {
-                using(IDbConnection conn = new SqlConnection(_ConnectionString)) {
-                    result = conn.Update<T>(item);
-
-                    if(result.Pk_Id > 0 || string.IsNullOrEmpty(result.Pk_UUID)) {
-                        result.Success = Result.True;
-                    } else {
-                        result.Success = Result.False;
-                    }
+                    result = conn.Save<T>(item);
                 }
             } catch(Exception exc) {
                 result.Success = Result.Exception;
